@@ -1,8 +1,20 @@
+/***********************************************************************
+ * 
+ * Blink a LED in Arduino-style and use function from the delay library.
+ * ATmega328P (Arduino Uno), 16 MHz, PlatformIO
+ *
+ * Copyright (c) 2022 Tomas Fryza
+ * Dept. of Radio Electronics, Brno University of Technology, Czechia
+ * This work is licensed under the terms of the MIT license.
+ * 
+ **********************************************************************/
+
+
+/* Defines -----------------------------------------------------------*/
 #define LED_GREEN PB5   // PB5 is AVR pin where green on-board LED 
                         // is connected
+#define LED_RED PB0  
 #define SHORT_DELAY 250 // Delay in milliseconds
-#define MID_DELAY 500 // Delay in milliseconds
-#define LONG_DELAY 1000 // Delay in milliseconds
 #ifndef F_CPU
 # define F_CPU 16000000 // CPU frequency in Hz required for delay funcs
 #endif
@@ -17,39 +29,38 @@
 // names. We are using Arduino-style just to simplify the first lab.
 #include "Arduino.h"
 #define PB5 13          // In Arduino world, PB5 is called "13"
+#define PB0 8
+// -----
 
+
+/* Function definitions ----------------------------------------------*/
+/**********************************************************************
+ * Function: Main function where the program execution begins
+ * Purpose:  Toggle one LED and use delay library.
+ * Returns:  none
+ **********************************************************************/
 int main(void)
 {
-    uint8_t led_value_l = LOW;  // Local variable to keep LED status
-    uint8_t led_value_h = HIGH;  // Local variable to keep LED status
+    uint8_t led_value = LOW;  // Local variable to keep LED status
 
     // Set pin where on-board LED is connected as output
     pinMode(LED_GREEN, OUTPUT);
+    pinMode(LED_RED, OUTPUT);
 
     // Infinite loop
     while (1)
     {
-        // Letter `A` Morse code
+        // Change LED value
+        if (led_value == LOW)
+            led_value = HIGH;
+        else
+            led_value = LOW;
 
-        //Turn the LED on
-        digitalWrite(LED_GREEN, led_value_l);
-        // Pause duration
-        _delay_ms(MID_DELAY);
-
-        //Turn the LED off
-        digitalWrite(LED_GREEN, led_value_h);
-        // Dot duration
+        // Pause several milliseconds
         _delay_ms(SHORT_DELAY);
-
-        //Turn the LED on
-        digitalWrite(LED_GREEN, led_value_l);
-        // Pause duration
-        _delay_ms(MID_DELAY);
-
-        //Turn the LED off
-        digitalWrite(LED_GREEN, led_value_h);
-        // Comma duration
-        _delay_ms(LONG_DELAY);
+        // Turn ON/OFF on-board LED
+        digitalWrite(LED_GREEN, led_value);
+        digitalWrite(LED_RED, led_value);
     }
 
     // Will never reach this

@@ -41,22 +41,22 @@ int main(void)
         //Turn the LED on
         digitalWrite(LED_GREEN, led_value_l);
         // Pause duration
-        _delay_ms(MID_DELAY);
+        _delay_ms(MID_DELAY); // MID_DELAY 500 - Delay in milliseconds
 
         //Turn the LED off
         digitalWrite(LED_GREEN, led_value_h);
         // Dot duration
-        _delay_ms(SHORT_DELAY);
+        _delay_ms(SHORT_DELAY); // SHORT_DELAY 250 - Delay in milliseconds
 
         //Turn the LED on
         digitalWrite(LED_GREEN, led_value_l);
         // Pause duration
-        _delay_ms(MID_DELAY);
+        _delay_ms(MID_DELAY); // MID_DELAY 500 - Delay in milliseconds
 
         //Turn the LED off
         digitalWrite(LED_GREEN, led_value_h);
         // Comma duration
-        _delay_ms(LONG_DELAY);
+        _delay_ms(LONG_DELAY); // LONG_DELAY 1000 - Delay in milliseconds
     }
 
     // Will never reach this

@@ -9,6 +9,6 @@
    | `uint16_t` | 16 | 0 to 65 535 | Unsigned 16-bit integer |
    | `int16_t`  | 16 | -32 768 to 32767 | Signed 16-bit integer |
    | `float`    | 32 | -3.4e+38, ..., 3.4e+38 | Single-precision floating-point |
-   | `void`     | - | - | - |
+   | `void`     |  |  |  |
 
 <a name="part1"></a>

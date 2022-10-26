@@ -7,11 +7,11 @@
    | **Push button** | **PC0[A0] voltage** | **ADC value (calculated)** | **ADC value (measured)** | **ADC value (measured, hex)** |
    | :-: | :-: | :-: | :-: | :-: |
    | Right  | 0&nbsp;V     | 0    | 0  | 0 |
-   | Up     | 0.495&nbsp;V | 101  | 99 | 63f |
+   | Up     | 0.495&nbsp;V | 101  | 99 | 63 |
    | Down   | 1.203&nbsp;V | 246  | 257 | 101 |
    | Left   | 1.969&nbsp;V | 403  | 409 | 199 |
    | Select | 3.181&nbsp;V | 651  | 639 | 27f |
-   | none   | 5.000&nbsp;V | 1023 | 1023 | 0ff |
+   | none   | 5.000&nbsp;V | 1023 | 1023 | 3ff |
 
 | **Operation** | **Register(s)** | **Bit(s)** | **Description** |
    | :-- | :-: | :-: | :-- |

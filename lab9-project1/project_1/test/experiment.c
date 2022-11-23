@@ -47,35 +47,32 @@ int main(void)
     lcd_init(LCD_DISP_ON_CURSOR_BLINK);
 
     // Put string(s) on LCD screen
-    
-    lcd_gotoxy(0, 0);
-    lcd_puts("Waveform: ");
 
-    lcd_gotoxy(0, 1);
-    lcd_puts(" ");
+    lcd_gotoxy(1, 1);
+    lcd_puts("b");
 
-    lcd_gotoxy(8, 1);
-    lcd_puts("Speed: ");
+    lcd_gotoxy(11, 1);
+    lcd_puts("c");
 
     // Custom character definition using https://omerk.github.io/lcdchargen/
-    uint8_t customChar[16] = {
-        0b00000,    
-        0b00000,
-        0b01110,
+    /*uint8_t customChar[24] = {
+        0b00100,
+        0b01010,
         0b10001,
-        0b00000,
-        0b00000,
-        0b00000,
-        0b00000,
+        0b10000,
+        0b01000,
+        0b00100,
+        0b00010,
+        0b00001,
 
-        0b00000,
-        0b00000,
-        0b00000,
-        0b00000,
+        0b00100,
+        0b01010,
         0b10001,
-        0b01110,
-        0b00000,
-        0b00000
+        0b00001,
+        0b00010,
+        0b00100,
+        0b01000,
+        0b10000
     };
 
     lcd_command(1<<LCD_CGRAM);       // Set addressing to CGRAM (Character Generator RAM)
@@ -86,10 +83,9 @@ int main(void)
                                      // ie to character codes
 
     // Display symbol with Character code 0
-    lcd_gotoxy(10,0);
+    lcd_gotoxy(12,1);
     lcd_putc(0x00);
-    lcd_putc(0x01);
-    
+    */
 
     // Configuration of 8-bit Timer/Counter2 for Stopwatch update
     // Set the overflow prescaler to 16 ms and enable interrupt
@@ -121,9 +117,6 @@ int main(void)
  **********************************************************************/
 ISR(TIMER2_OVF_vect)
 {
-
-
-  /*
     static uint8_t no_of_overflows = 0;
     static uint8_t tenths = 0;      // Tenths of a second
     static uint8_t seconds = 0;     // Seconds
@@ -186,25 +179,15 @@ ISR(TIMER2_OVF_vect)
         lcd_gotoxy(11, 0);
         lcd_puts(string);
 
-        // if
+        /* if
         lcd_gotoxy(1, 1);
         lcd_putc(0xff);
-        
-  */
-    
-
-
-
-    
-
-    
-    
+        */
+    }
     // Else do nothing and exit the ISR
-
-    
 }
 
-/*
+
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t symbol = 0;
@@ -220,8 +203,9 @@ ISR(TIMER0_OVF_vect)
 
     }
     // WRITE YOUR CODE HERE
-*/
+
     
 
 
     
+}

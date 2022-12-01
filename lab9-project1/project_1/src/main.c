@@ -251,7 +251,7 @@ ISR(TIMER0_OVF_vect)
     static uint8_t no_of_overflows = 0;
     static uint8_t tenths = 9;  // Tenths of a second
     static uint8_t seconds = 59;   
-    static uint8_t minutes = 59;
+    static uint8_t minutes = 1;
     char string[2];             // String for converted numbers by itoa()
 
 
@@ -313,7 +313,6 @@ ISR(TIMER0_OVF_vect)
           
       itoa(minutes, string, 10);  // Convert decimal value to string
       lcd_gotoxy(8, 1);
-      
       if (minutes < 10)
       { 
         lcd_putc('0');
@@ -341,15 +340,14 @@ ISR(TIMER0_OVF_vect)
 
         
 
-      if (seconds <= 50)
-      {
+      
         uint8_t led_value = LOW;  // Local variable to keep LED status
         
         // Set pin where on-board LED is connected as output
         pinMode(LED_RED, OUTPUT);
 
         // Infinite loop
-        if (seconds <= 50)
+        if (tenths == 0 && seconds == 0 && minutes == 0)  
         {
          // Change LED value
           if (led_value == LOW)
@@ -365,7 +363,7 @@ ISR(TIMER0_OVF_vect)
         {
             
         }
-      }
+      
 
     }
       /* Encoder routines -------------------------------------------------*/

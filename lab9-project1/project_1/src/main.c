@@ -56,9 +56,9 @@
 
 
 
-/* Define variables */
+/*----- Define global variables -----*/
 
-uint8_t ls, cs;             // last state, current state
+uint8_t ls_js, cs_js;             // last state, current state
 uint8_t ls_en, cs_en;       // last state and current state of the button of the encoder 
 int8_t cnt_ls = 0;
 int8_t cnt_en = 0;
@@ -81,7 +81,7 @@ int main(void)
     GPIO_mode_input_nopull(&DDRB,EN_DT);
     GPIO_mode_input_nopull(&DDRB,EN_CLK);
 
-    // Initialize display
+    /*-------- Initialize display --------*/
     lcd_init(LCD_DISP_ON);
 
     // Put string(s) on LCD screen
@@ -95,10 +95,23 @@ int main(void)
     lcd_gotoxy(0,1);
     lcd_puts("Budik ");
 
-    
+  /*-------- Configure Analog-to-Digital Convertion unit --------*/
+    // Select ADC voltage reference to "AVcc with external capacitor at AREF pin"
+    ADMUX |= (1<<REFS0);
+
+    // Enable ADC module
+    ADCSRA |= (1<<ADEN);
+  
+    // Enable conversion complete interrupt
+    ADCSRA |=(1<<ADIE);
+
+    // Set clock prescaler to 128
+    ADCSRA |=((1<<ADPS2) | (1<<ADPS1) | (1<<ADPS0));
+
+
+  /*-------- Timers --------*/
     // Configuration of 8-bit Timer/Counter2 for Stopwatch update
     // Set the overflow prescaler to 16 ms and enable interrupt
-
 
   TIM2_overflow_16ms();
   TIM2_overflow_interrupt_enable();
@@ -139,15 +152,17 @@ ISR(TIMER2_OVF_vect)
   static uint8_t minutes = 0;
   char string[2];             // String for converted numbers by itoa()
     
-  // read the state of the button on joystick
+  // reading the state of the button on joystick
+  
   /*  with the change of the state from 1 to 0, the stopwatch is started 
       and with the change from 0 to 1 we stop the stopwatch
   */
+  
   // lcd_gotoxy(6, 0);
-  cs = GPIO_read(&PIND,JS_SW);
-    if (cs!=ls)
+  cs_js = GPIO_read(&PIND,JS_SW);
+    if (cs_js!=ls_js)
     {
-      if (GPIO_read(&PIND,JS_SW)==cs && cs==1)
+      if (GPIO_read(&PIND,JS_SW)==cs_js && cs_js==1)
       {
         if(cnt_ls==0)
         {
@@ -164,8 +179,9 @@ ISR(TIMER2_OVF_vect)
       lcd_puts(string);
     }
 
-  ls=cs;
+  ls_js=cs_js;
 
+  // start the stopwatch with pressed button
   if(cnt_ls==0)
   {  
     no_of_overflows++;
@@ -174,10 +190,12 @@ ISR(TIMER2_OVF_vect)
       // Do this every 6 x 16 ms = 100 ms
       no_of_overflows = 0;
       tenths++;  
+
       if(tenths > 9)
       { 
         tenths = 0;
         seconds++;
+
         if (seconds > 59)
         {
           seconds = 0;
@@ -236,6 +254,13 @@ ISR(TIMER0_OVF_vect)
     static uint8_t minutes = 59;
     char string[2];             // String for converted numbers by itoa()
 
+
+    // reading the state of the button on encoder
+  
+  /*  with the change of the state from 1 to 0, the alarm clock is started 
+      and with the change from 0 to 1 we stop the alarm clock
+  */
+
     cs_en = GPIO_read(&PINB,EN_SW);
     if (cs_en!=ls_en)
     {
@@ -258,6 +283,9 @@ ISR(TIMER0_OVF_vect)
 
     ls_en=cs_en;
 
+
+    
+  // start the alarm clock with pressed button
     if (cnt_en==0)
     {
       no_of_overflows++;
@@ -285,6 +313,7 @@ ISR(TIMER0_OVF_vect)
           
       itoa(minutes, string, 10);  // Convert decimal value to string
       lcd_gotoxy(8, 1);
+      
       if (minutes < 10)
       { 
         lcd_putc('0');
@@ -296,6 +325,7 @@ ISR(TIMER0_OVF_vect)
 
       itoa(seconds, string, 10);  // Convert decimal value to string
       lcd_gotoxy(11, 1);
+      
       if (seconds < 10)
       {
         lcd_putc('0');

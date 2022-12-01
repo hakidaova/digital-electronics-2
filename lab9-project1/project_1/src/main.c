@@ -52,13 +52,16 @@
 // This part is needed to use Arduino functions but also physical pin
 // names. We are using Arduino-style just to simplify the first lab.
 #include "Arduino.h"
-#define PB5 13          // In Arduino world, PB5 is called "13"
-// -----
+#define PB5 13              // In Arduino world, PB5 is called "13"
 
-/* ---------------*/
 
-uint8_t ls, cs;
-int8_t cnt = 0;
+
+/* Define variables */
+
+uint8_t ls, cs;             // last state, current state
+uint8_t ls_en, cs_en;       // last state and current state of the button of the encoder 
+int8_t cnt_ls = 0;
+int8_t cnt_en = 0;
 //uint8_t 
 
 
@@ -136,31 +139,34 @@ ISR(TIMER2_OVF_vect)
   static uint8_t minutes = 0;
   char string[2];             // String for converted numbers by itoa()
     
- 
-  lcd_gotoxy(6, 1);
+  // read the state of the button on joystick
+  /*  with the change of the state from 1 to 0, the stopwatch is started 
+      and with the change from 0 to 1 we stop the stopwatch
+  */
+  // lcd_gotoxy(6, 0);
   cs = GPIO_read(&PIND,JS_SW);
     if (cs!=ls)
     {
       if (GPIO_read(&PIND,JS_SW)==cs && cs==1)
       {
-        if(cnt==0)
+        if(cnt_ls==0)
         {
-          cnt++;
+          cnt_ls++;
         }
         else
         {
-          cnt--;
+          cnt_ls--;
         }
       }
 
-      itoa(cnt, string, 10);
-      lcd_gotoxy(6, 1);
+      itoa(cnt_ls, string, 10);
+      lcd_gotoxy(6, 0);
       lcd_puts(string);
     }
 
   ls=cs;
 
-  if(cnt==0)
+  if(cnt_ls==0)
   {  
     no_of_overflows++;
     if (no_of_overflows >= 6)
@@ -220,6 +226,8 @@ ISR(TIMER2_OVF_vect)
  * LCD display every 16 ms.
  */
 
+
+
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t no_of_overflows = 0;
@@ -228,29 +236,53 @@ ISR(TIMER0_OVF_vect)
     static uint8_t minutes = 59;
     char string[2];             // String for converted numbers by itoa()
 
-    no_of_overflows++;
-    if (no_of_overflows >= 6)
+    cs_en = GPIO_read(&PINB,EN_SW);
+    if (cs_en!=ls_en)
     {
-        // Do this every 6 x 16 ms = 100 ms
-        no_of_overflows = 0;
-        tenths--;  
+      if (GPIO_read(&PINB,EN_SW)==cs_en && cs_en==1)
+      {
+        if(cnt_en==0)
+        {
+          cnt_en++;
+        }
+        else
+        {
+          cnt_en--;
+        }
+      }
 
-        if(tenths == 0)
-        { tenths = 9;
-          seconds--;
-
-            if (seconds == 0)
-            {
-              seconds = 59;
-              minutes--; 
-              
-            }
-        }    
-      
+      itoa(cnt_en, string, 10);
+      lcd_gotoxy(6, 1);
+      lcd_puts(string);
     }
 
+    ls_en=cs_en;
 
+    if (cnt_en==0)
+    {
+      no_of_overflows++;
+      if (no_of_overflows >= 6)
+      {
+          // Do this every 6 x 16 ms = 100 ms
+          no_of_overflows = 0;
+          tenths--;  
+
+          if(tenths == 0)
+          { tenths = 9;
+            seconds--;
+
+              if (seconds == 0)
+              {
+                seconds = 59;
+                minutes--; 
+                
+              }
+          }    
         
+      }
+
+
+          
       itoa(minutes, string, 10);  // Convert decimal value to string
       lcd_gotoxy(8, 1);
       if (minutes < 10)
@@ -258,7 +290,7 @@ ISR(TIMER0_OVF_vect)
         lcd_putc('0');
       }
       lcd_puts(string);
-     
+      
       lcd_gotoxy(10, 1);
       lcd_putc(':');
 
@@ -272,28 +304,28 @@ ISR(TIMER0_OVF_vect)
 
       lcd_gotoxy(13, 1);
       lcd_putc('.');
-        
+          
       itoa(tenths, string, 10);  // Convert decimal value to string
       lcd_gotoxy(14, 1);
       lcd_puts(string);
 
-      
+        
 
-    if (seconds <= 50)
-    {
-      uint8_t led_value = LOW;  // Local variable to keep LED status
-      
+      if (seconds <= 50)
+      {
+        uint8_t led_value = LOW;  // Local variable to keep LED status
+        
         // Set pin where on-board LED is connected as output
         pinMode(LED_RED, OUTPUT);
 
         // Infinite loop
         if (seconds <= 50)
         {
-          // Change LED value
+         // Change LED value
           if (led_value == LOW)
             led_value = HIGH;
           else
-           led_value = LOW;
+          led_value = LOW;
           // Pause several milliseconds
           //_delay_ms(SHORT_DELAY);
           // Turn ON/OFF on-board LED
@@ -303,6 +335,8 @@ ISR(TIMER0_OVF_vect)
         {
             
         }
+      }
+
     }
       /* Encoder routines -------------------------------------------------*/
       /**********************************************************************

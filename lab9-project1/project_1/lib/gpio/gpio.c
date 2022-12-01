@@ -1,8 +1,7 @@
 /***********************************************************************
  * 
  * GPIO library for AVR-GCC.
- * 
- * ATmega328P (Arduino Uno), 16 MHz, PlatformIO
+ * ATmega328P (Arduino Uno), 16 MHz, AVR 8-bit Toolchain 3.6.2
  *
  * Copyright (c) 2019 Tomas Fryza
  * Dept. of Radio Electronics, Brno University of Technology, Czechia
@@ -12,7 +11,7 @@
 
 
 /* Includes ----------------------------------------------------------*/
-#include <gpio.h>
+#include "gpio.h"
 
 
 /* Function definitions ----------------------------------------------*/
@@ -95,8 +94,17 @@ uint8_t GPIO_read(volatile uint8_t *reg, uint8_t pin)
 /**********************************************************************
  * Function: GPIO_mode_input_nopull()
  **********************************************************************/
-
+void GPIO_mode_input_nopull(volatile uint8_t *reg, uint8_t pin)
+{
+    *reg = *reg & ~(1<<pin);  // Data Direction Register DDR
+    reg++;                    // Change pointer to Data Register
+    *reg = *reg & ~(1<<pin);  //Deta Reegiter
+}
 
 /**********************************************************************
  * Function: GPIO_write_toggle()
  **********************************************************************/
+void GPIO_write_toggle(volatile uint8_t *reg, uint8_t pin)
+{
+    *reg = *reg ^ (1<<pin);
+}

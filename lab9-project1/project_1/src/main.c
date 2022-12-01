@@ -55,6 +55,14 @@
 #define PB5 13          // In Arduino world, PB5 is called "13"
 // -----
 
+/* ---------------*/
+
+uint8_t ls, cs;
+int8_t cnt = 0;
+//uint8_t 
+
+
+
 /* Function definitions ----------------------------------------------*/
 /**********************************************************************
  * Function: Main function where the program execution begins
@@ -64,9 +72,14 @@
  **********************************************************************/
 int main(void)
 {
+    GPIO_mode_input_pullup(&DDRD,JS_SW); 
+    GPIO_mode_input_pullup(&DDRB,EN_SW);
+
+    GPIO_mode_input_nopull(&DDRB,EN_CLK);
+    GPIO_mode_input_nopull(&DDRB,EN_DT);
 
     // Initialize display
-    lcd_init(LCD_DISP_ON_CURSOR_BLINK);
+    lcd_init(LCD_DISP_ON);
 
     // Put string(s) on LCD screen
           // putt string "Stopky" to LCD
@@ -115,62 +128,90 @@ int main(void)
  **********************************************************************/
 ISR(TIMER2_OVF_vect)
 { 
-  
-    static uint8_t no_of_overflows = 0;
-    static uint8_t tenths = 0;  // Tenths of a second
-    static uint8_t seconds = 0;   
-    static uint8_t minutes = 0;
-    char string[2];             // String for converted numbers by itoa()
+  static uint8_t no_of_overflows = 0;
+  static uint8_t tenths = 0;  // Tenths of a second
+  static uint8_t seconds = 0;   
+  static uint8_t minutes = 0;
+  char string[2];             // String for converted numbers by itoa()
+    
+ 
+  lcd_gotoxy(6, 1);
+  cs = GPIO_read(&PIND,JS_SW);
+    if (cs!=ls)
+    {
+      if (GPIO_read(&PIND,JS_SW)==cs && cs==1)
+      {
+        if(cnt==0)
+        {
+          cnt++;
+        }
+        else
+        {
+          cnt--;
+        }
+      }
 
+      itoa(cnt, string, 10);
+      lcd_gotoxy(6, 1);
+      lcd_puts(string);
+    }
+
+  ls=cs;
+
+
+  do  
+  {  
     no_of_overflows++;
     if (no_of_overflows >= 6)
     {
-        // Do this every 6 x 16 ms = 100 ms
-        no_of_overflows = 0;
-        tenths++;  
-
-        if(tenths > 9)
-        { tenths = 0;
-          seconds++;
-
-            if (seconds > 59)
-            {
-              seconds = 0;
-              minutes++;
-            }    
-      
-        }
+      // Do this every 6 x 16 ms = 100 ms
+      no_of_overflows = 0;
+      tenths++;  
+      if(tenths > 9)
+      { 
+        tenths = 0;
+        seconds++;
+        if (seconds > 59)
+        {
+          seconds = 0;
+          minutes++;
+        }    
+      }
         
       itoa(minutes, string, 10);  // Convert decimal value to string
       lcd_gotoxy(8, 0);
+      
       if (minutes < 10)
       { 
         lcd_putc('0');
       }
+      
       lcd_puts(string);
-     
       lcd_gotoxy(10, 0);
       lcd_putc(':');
-
       itoa(seconds, string, 10);  // Convert decimal value to string
       lcd_gotoxy(11, 0);
+      
       if (seconds < 10)
       {
-        lcd_putc('0');
+      lcd_putc('0');
       }
+      
       lcd_puts(string);
-
       lcd_gotoxy(13, 0);
       lcd_putc('.');
-        
+      
       itoa(tenths, string, 10);  // Convert decimal value to string
       lcd_gotoxy(14, 0);
       lcd_puts(string);
-
-
-    }
+      }
+  }    
+  while (ls==0);
   
 }
+return 0;
+
+
 
 /* Variables ---------------------------------------------------------*/
 // Custom character definition using https://omerk.github.io/lcdchargen/
@@ -237,8 +278,7 @@ ISR(TIMER0_OVF_vect)
       lcd_gotoxy(14, 1);
       lcd_puts(string);
 
-      lcd_gotoxy(6, 1);
-      lcd_putc('0');
+      
 
     if (seconds <= 50)
     {
@@ -283,8 +323,9 @@ ISR(TIMER0_OVF_vect)
 }
 
 ISR(TIMER1_OVF_vect)
-{ 
- lcd_gotoxy(6, 1);
+{
+
+ 
 }
 
 /* Joystick routines -------------------------------------------------*/

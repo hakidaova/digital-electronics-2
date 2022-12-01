@@ -85,6 +85,8 @@ int main(void)
           // putt string "Stopky" to LCD
     lcd_gotoxy(0,0);
     lcd_puts("Stopky ");
+    lcd_gotoxy(8, 0);
+    lcd_puts("00:00.0");
 
           // putt string "Budik" to LCD 
     lcd_gotoxy(0,1);
@@ -157,7 +159,6 @@ ISR(TIMER2_OVF_vect)
     }
 
   ls=cs;
-
 
   if(cnt==0)
   {  

@@ -34,26 +34,19 @@
 #define EN_DT PB3   // PB3 is where the DT pin of the encoder is connected
 #define EN_CLK PB4  // PB4 is where the CLK pin of the encoder is connected
 
-#define SHORT_DELAY 250 // Delay in milliseconds
+#define DELAY 250 // Delay in milliseconds
 #ifndef F_CPU
 # define F_CPU 16000000 // CPU frequency in Hz required for delay funcs
 #endif
 
 /* Includes ----------------------------------------------------------*/
 #include <avr/io.h>         // AVR device-specific IO definitions
-#include <util/delay.h>     // Functions for busy-wait delay loops
 #include <avr/interrupt.h>  // Interrupts standard C library for AVR-GCC
 #include <gpio.h>           // GPIO library for AVR-GCC
 #include "timer.h"          // Timer library for AVR-GCC
 #include <lcd.h>            // Peter Fleury's LCD library
 #include <stdlib.h>         // C library. Needed for number conversions
 
-// -----
-// This part is needed to use Arduino functions but also physical pin
-// names. We are using Arduino-style just to simplify the first lab.
-#include "Arduino.h"
-#define PB5 13          // In Arduino world, PB5 is called "13"
-// -----
 
 /* Function definitions ----------------------------------------------*/
 /**********************************************************************
@@ -64,7 +57,6 @@
  **********************************************************************/
 int main(void)
 {
-
     // Initialize display
     lcd_init(LCD_DISP_ON_CURSOR_BLINK);
 
@@ -86,8 +78,6 @@ int main(void)
   TIM2_overflow_interrupt_enable();
   TIM0_overflow_16ms();
   TIM0_overflow_interrupt_enable();
-  TIM1_overflow_4ms();
-  TIM1_overflow_interrupt_enable();
 
 
     // Enables interrupts by setting the global interrupt mask
@@ -102,8 +92,6 @@ int main(void)
 
     // Will never reach this
     return 0;
-
- 
 }
 
 
@@ -114,8 +102,7 @@ int main(void)
  *           ie approximately every 100 ms (6 x 16 ms = 100 ms).
  **********************************************************************/
 ISR(TIMER2_OVF_vect)
-{ 
-  
+{
     static uint8_t no_of_overflows = 0;
     static uint8_t tenths = 0;  // Tenths of a second
     static uint8_t seconds = 0;   
@@ -169,7 +156,6 @@ ISR(TIMER2_OVF_vect)
 
 
     }
-  
 }
 
 /* Variables ---------------------------------------------------------*/
@@ -202,14 +188,10 @@ ISR(TIMER0_OVF_vect)
             if (seconds == 0)
             {
               seconds = 59;
-              minutes--; 
-              
-            }
-        }    
+              minutes--;
+            }    
       
-    }
-
-
+        }
         
       itoa(minutes, string, 10);  // Convert decimal value to string
       lcd_gotoxy(8, 1);
@@ -239,32 +221,8 @@ ISR(TIMER0_OVF_vect)
 
       lcd_gotoxy(6, 1);
       lcd_putc('0');
+      lcd_gotoxy(6, 1);
 
-    if (seconds <= 50)
-    {
-      uint8_t led_value = LOW;  // Local variable to keep LED status
-      
-        // Set pin where on-board LED is connected as output
-        pinMode(LED_RED, OUTPUT);
-
-        // Infinite loop
-        if (seconds <= 50)
-        {
-          // Change LED value
-          if (led_value == LOW)
-            led_value = HIGH;
-          else
-           led_value = LOW;
-          // Pause several milliseconds
-          //_delay_ms(SHORT_DELAY);
-          // Turn ON/OFF on-board LED
-          digitalWrite(LED_RED, led_value);
-        }
-        else 
-        {
-            
-        }
-    }
       /* Encoder routines -------------------------------------------------*/
       /**********************************************************************
       * Function: něco
@@ -276,15 +234,10 @@ ISR(TIMER0_OVF_vect)
       //{
         
       //}
-    
+    }
 
       
     
-}
-
-ISR(TIMER1_OVF_vect)
-{ 
- lcd_gotoxy(6, 1);
 }
 
 /* Joystick routines -------------------------------------------------*/

@@ -159,7 +159,7 @@ ISR(TIMER2_OVF_vect)
   ls=cs;
 
 
-  do  
+  if(cnt==0)
   {  
     no_of_overflows++;
     if (no_of_overflows >= 6)
@@ -206,10 +206,8 @@ ISR(TIMER2_OVF_vect)
       lcd_puts(string);
       }
   }    
-  while (ls==0);
   
 }
-return 0;
 
 
 

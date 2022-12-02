@@ -250,8 +250,8 @@ ISR(TIMER0_OVF_vect)
 {
     static uint8_t no_of_overflows = 0;
     static uint8_t tenths = 9;  // Tenths of a second
-    static uint8_t seconds = 59;   
-    static uint8_t minutes = 1;
+    static uint8_t seconds = 5;   
+    static uint8_t minutes = 0;
     char string[2];             // String for converted numbers by itoa()
 
 
@@ -299,18 +299,16 @@ ISR(TIMER0_OVF_vect)
           { tenths = 9;
             seconds--;
 
-              if (seconds == 0)
-              {
-                seconds = 59;
-                minutes--; 
-                
-              }
-          }    
-        
-      }
+            if (seconds == 0)
+            {
+              seconds = 59;
+              minutes--;
 
+            }
+          } 
 
-          
+      }      
+      
       itoa(minutes, string, 10);  // Convert decimal value to string
       lcd_gotoxy(8, 1);
       if (minutes < 10)
@@ -359,13 +357,15 @@ ISR(TIMER0_OVF_vect)
           // Turn ON/OFF on-board LED
           digitalWrite(LED_RED, led_value);
         }
-        else 
-        {
-            
-        }
-      
-
     }
+
+    if (seconds == 0 && minutes == 0)
+      {
+        cnt_en == 1;
+      }
+    cnt_en = cnt_en;
+
+
       /* Encoder routines -------------------------------------------------*/
       /**********************************************************************
       * Function: něco

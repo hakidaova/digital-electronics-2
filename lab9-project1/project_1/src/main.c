@@ -248,8 +248,8 @@ ISR(TIMER2_OVF_vect)
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t no_of_overflows = 0;
-    static uint8_t tenths = 1;  // Tenths of a second
-    static uint8_t seconds = 5;   
+    static uint8_t tenths = 9;  // Tenths of a second
+    static uint8_t seconds = 59;   
     static uint8_t minutes = 0;
     char string[2];             // String for converted numbers by itoa()
 
@@ -309,7 +309,8 @@ ISR(TIMER0_OVF_vect)
     lcd_gotoxy(14, 1);
     lcd_puts(string);
 
-    // Encoder value and changing time
+
+    // Get encoder value and change time
     cs_en_r = GPIO_read(&PINB, EN_CLK);
 
     if (cs_en_r != ls_en_r && cs_en_r == 1)
@@ -317,6 +318,21 @@ ISR(TIMER0_OVF_vect)
       if(GPIO_read(&PINB, EN_DT) != cs_en_r)
       {
         minutes++;
+        seconds++;
+        if (seconds>59)
+        {
+          seconds = 0;
+        }
+        
+      }
+      else
+      {
+        minutes--;
+        seconds--;
+        if (seconds < 1)
+        {
+          seconds = 59;
+        }
       }
     }
     ls_en_r = cs_en_r;
@@ -360,6 +376,10 @@ ISR(TIMER0_OVF_vect)
       }
       
       }
+      
+
+
+
       
         uint8_t led_value = LOW;  // Local variable to keep LED status
         

@@ -5,7 +5,6 @@ Application of analog joy-stick (2 ADC channels, 1 push button), rotary encoder,
 ## Recommended GitHub repository structure
 
    ```c
-   YOUR_PROJECT        // PlatfomIO project
    ├── include         // Included files
        └── timer.h  
    ├── lib             // Libraries
@@ -27,8 +26,8 @@ Application of analog joy-stick (2 ADC channels, 1 push button), rotary encoder,
 
 ### Team members
 
-* Member 1 (responsible for xxx)
-* Member 2 (responsible for xxx)
+* Daová Hana (responsible for xxx)
+* Foltyn Ondřej (responsible for xxx)
 
 ## Hardware description
 

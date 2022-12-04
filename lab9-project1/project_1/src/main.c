@@ -249,10 +249,10 @@ ISR(TIMER0_OVF_vect)
 {
     static uint8_t no_of_overflows = 0;
     static uint8_t tenths = 9;  // Tenths of a second
-    static uint8_t seconds = 59;   
+    static uint8_t seconds = 1;   
     static uint8_t minutes = 0;
     char string[2];             // String for converted numbers by itoa()
-
+    uint8_t led_value = LOW;  // Local variable to keep LED status
 
     // reading the state of the button on encoder
   
@@ -309,7 +309,7 @@ ISR(TIMER0_OVF_vect)
     lcd_gotoxy(14, 1);
     lcd_puts(string);
 
-
+   
     // Get encoder value and change time
     cs_en_r = GPIO_read(&PINB, EN_CLK);
 
@@ -318,6 +318,11 @@ ISR(TIMER0_OVF_vect)
       if(GPIO_read(&PINB, EN_DT) != cs_en_r)
       {
         minutes++;
+        if (minutes>59)
+        {
+          minutes = 0;
+        }
+        
         seconds++;
         if (seconds>59)
         {
@@ -328,6 +333,11 @@ ISR(TIMER0_OVF_vect)
       else
       {
         minutes--;
+        if (minutes == 0)
+        {
+          minutes = 59;
+        }
+        
         seconds--;
         if (seconds < 1)
         {
@@ -343,45 +353,42 @@ ISR(TIMER0_OVF_vect)
     {
       no_of_overflows++;
       
-      if (tenths <= 1 && seconds == 0 && minutes == 0)
-        {
-          lcd_gotoxy(8, 1);
-          lcd_putc('00:00.0');
-        }
+      if (led_value == HIGH)
+      {
+        led_value = LOW;
+      }     
+
+      
+      if (tenths == 1 && seconds == 0 && minutes == 0)
+      {
+        lcd_gotoxy(8, 1);
+        lcd_putc('00:00.0');
+      }
             
       else 
       {
-      
-      if (no_of_overflows >= 6)
-      {
+        if (no_of_overflows >= 6)
+        {
           // Do this every 6 x 16 ms = 100 ms
           no_of_overflows = 0;
           tenths--;  
 
           if(tenths == 0)
-          { tenths = 9;
+          { 
+            tenths = 9;
             seconds--;
 
-            if (seconds == 0 && tenths == 0) // 
+            if (seconds == 0 && tenths == 0)
             {
               seconds = 59;
               minutes--;
-              
-              if (minutes == 0 && seconds == 0 && tenths == 0)
-              {
-                tenths = 0;
-              }
-            }
+            }   
           }
-      }
+        }
       
       }
-      
-
-
-
-      
-        uint8_t led_value = LOW;  // Local variable to keep LED status
+          
+        
         
         // Set pin where on-board LED is connected as output
         pinMode(LED_RED, OUTPUT);
@@ -399,6 +406,7 @@ ISR(TIMER0_OVF_vect)
           // Turn ON/OFF on-board LED
           digitalWrite(LED_RED, led_value);
         }
+        
     }
 
     /*

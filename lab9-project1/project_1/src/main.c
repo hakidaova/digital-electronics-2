@@ -317,28 +317,29 @@ ISR(TIMER0_OVF_vect)
     {
       if(GPIO_read(&PINB, EN_DT) != cs_en_r)
       {
-        minutes++;
-        if (minutes>59)
+        minutes++;          // pridavani minut
+        if (minutes>59)     // kdyz vetsi nez 59 tak zpet na 0
         {
-          minutes = 0;
+          minutes = 0;    
         }
         
-        seconds++;
-        if (seconds>59)
+        seconds++;          // pridavani sekund
+        if (seconds>59)     // zas kdyz vetsi nez 59 tak zpet na 0
         {
           seconds = 0;
         }
         
       }
-      else
+
+      else                   // kdyz tocim doleva
       {
-        minutes--;
-        if (minutes == 0)
+        minutes--;           // odcitam minuty
+        if (minutes == 0)    // toto nevim jak jinak udelat funguje to jak hovno
         {
           minutes = 59;
         }
         
-        seconds--;
+        seconds--;          // stejne jak minuty, nejak random to funguje 
         if (seconds < 1)
         {
           seconds = 59;
@@ -346,8 +347,8 @@ ISR(TIMER0_OVF_vect)
       }
     }
     ls_en_r = cs_en_r;
-
-
+    // sekundy a minuty se pridavaji zaroven, takze to by asi chtelo zmenit ale idk jak
+    
   // start the alarm clock with pressed button
     if (cnt_en==0)
     {

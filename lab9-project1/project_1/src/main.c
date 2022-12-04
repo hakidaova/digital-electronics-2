@@ -26,10 +26,15 @@
  **********************************************************************/
 
 /* Defines -----------------------------------------------------------*/
+// pins for joystick
 #define JS_SW PD2   // PD2 is an AVR pin where the button of the joystick is connected
 #define JS_VRx PC0  // PC0 is where the VRx pin of the joystick is connected
 #define JS_VRy PC1  // PC1 is where the VRy pin of the joystick is connected
+
+// pin for LED
 #define LED_RED PB5 // PB5 is where the LED diode is connected
+
+// pin for rotary encoder
 #define EN_SW PB2   // PB2 is an AVR pin where the button of the encoder is connected
 #define EN_DT PB3   // PB3 is where the DT pin of the encoder is connected
 #define EN_CLK PB4  // PB4 is where the CLK pin of the encoder is connected
@@ -100,6 +105,9 @@ int main(void)
     // Select ADC voltage reference to "AVcc with external capacitor at AREF pin"
     ADMUX |= (1<<REFS0);
 
+    // Select input channel ADC0 (voltage divider pin)
+    ADMUX &= ~((1<<MUX3) | (1<<MUX3) | (1<<MUX3) | (1<<MUX3) );
+    
     // Enable ADC module
     ADCSRA |= (1<<ADEN);
   
@@ -281,9 +289,9 @@ ISR(TIMER0_OVF_vect)
         }
       }
       
-      itoa(cnt_en, string, 10);
-      lcd_gotoxy(6, 1);
-      lcd_puts(string);
+      // itoa(cnt_en, string, 10);
+      // lcd_gotoxy(6, 1);
+      // lcd_puts(string);
     }
 
     ls_en=cs_en;
@@ -431,11 +439,43 @@ ISR(TIMER0_OVF_vect)
       //}
 }
 
-ISR(TIMER1_OVF_vect)
+ISR(ADC_vect)
 {
+  uint16_t x, y;
+  uint8_t channel = ADMUX & 0b00001111;
+  char string[4];
 
- 
+  if(channel == 0)
+  {
+    x = ADC;
+    itoa(x, string, 10);
+    lcd_gotoxy(5,0);
+    lcd_puts("  ");
+    lcd_puts(string);
+    lcd_gotoxy(5,0);
+    channel++;
+  
+    ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3));
+  }
+
+  else if(channel == 1)
+  {
+    y = ADC;
+    itoa(y, string, 10);
+    lcd_gotoxy(5,1);
+    lcd_puts("  ");
+    lcd_puts(string);
+    lcd_gotoxy(5,1);
+    channel = 0;
+    
+    ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3)); ADMUX |= (1<<MUX0);
+
+  }
 }
+
+
+//ISR(TIMER1_OVF_vect)
+//{}
 
 /* Joystick routines -------------------------------------------------*/
 /**********************************************************************

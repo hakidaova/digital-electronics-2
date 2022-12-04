@@ -59,10 +59,11 @@
 /*----- Define global variables -----*/
 
 uint8_t ls_js, cs_js;             // last state, current state
-uint8_t ls_en, cs_en;       // last state and current state of the button of the encoder 
+uint8_t ls_en, cs_en;             // last state and current state of the button of the encoder 
+uint8_t ls_en_r, cs_en_r;         // last and current state of the encoder
 int8_t cnt_ls = 0;
 int8_t cnt_en = 0;
-//uint8_t 
+int8_t cnt_en_r = 0;
 
 
 
@@ -144,6 +145,11 @@ int main(void)
  * Purpose:  Update the stopwatch on LCD screen every sixth overflow,
  *           ie approximately every 100 ms (6 x 16 ms = 100 ms).
  **********************************************************************/
+
+
+
+
+/*----------------- STOPWATCH ------------------------*/
 ISR(TIMER2_OVF_vect)
 { 
   static uint8_t no_of_overflows = 0;
@@ -236,20 +242,13 @@ ISR(TIMER2_OVF_vect)
 
 
 
-/* Variables ---------------------------------------------------------*/
-// Custom character definition using https://omerk.github.io/lcdchargen/
-/*--------------------------------------------------------------------*/
-/**
- * ISR starts when Timer/Counter0 overflows. Update the progress bar on
- * LCD display every 16 ms.
- */
 
-
+/*----------------- ALARM CLOCK ------------------------*/
 
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t no_of_overflows = 0;
-    static uint8_t tenths = 9;  // Tenths of a second
+    static uint8_t tenths = 1;  // Tenths of a second
     static uint8_t seconds = 5;   
     static uint8_t minutes = 0;
     char string[2];             // String for converted numbers by itoa()
@@ -283,7 +282,6 @@ ISR(TIMER0_OVF_vect)
 
     ls_en=cs_en;
 
-
     itoa(minutes, string, 10);  // Convert decimal value to string
     lcd_gotoxy(8, 1);
     if (minutes < 10)
@@ -310,6 +308,20 @@ ISR(TIMER0_OVF_vect)
     itoa(tenths, string, 10);  // Convert decimal value to string
     lcd_gotoxy(14, 1);
     lcd_puts(string);
+
+    // Encoder value and changing time
+    cs_en_r = GPIO_read(&PINB, EN_CLK);
+
+    if (cs_en_r != ls_en_r && cs_en_r == 1)
+    {
+      if(GPIO_read(&PINB, EN_DT) != cs_en_r)
+      {
+        minutes++;
+      }
+    }
+    ls_en_r = cs_en_r;
+
+
   // start the alarm clock with pressed button
     if (cnt_en==0)
     {
@@ -320,8 +332,7 @@ ISR(TIMER0_OVF_vect)
           lcd_gotoxy(8, 1);
           lcd_putc('00:00.0');
         }
-      
-      
+            
       else 
       {
       
@@ -335,17 +346,20 @@ ISR(TIMER0_OVF_vect)
           { tenths = 9;
             seconds--;
 
-            if (seconds == 0 && tenths == 0)
+            if (seconds == 0 && tenths == 0) // 
             {
               seconds = 59;
               minutes--;
+              
+              if (minutes == 0 && seconds == 0 && tenths == 0)
+              {
+                tenths = 0;
+              }
             }
           }
       }
       
       }
-
-      
       
         uint8_t led_value = LOW;  // Local variable to keep LED status
         

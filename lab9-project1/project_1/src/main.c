@@ -275,7 +275,7 @@ ISR(TIMER0_OVF_vect)
           cnt_en--;
         }
       }
-
+      
       itoa(cnt_en, string, 10);
       lcd_gotoxy(6, 1);
       lcd_puts(string);
@@ -284,11 +284,47 @@ ISR(TIMER0_OVF_vect)
     ls_en=cs_en;
 
 
-    
+    itoa(minutes, string, 10);  // Convert decimal value to string
+    lcd_gotoxy(8, 1);
+    if (minutes < 10)
+    { 
+      lcd_putc('0');
+    }
+    lcd_puts(string);
+      
+    lcd_gotoxy(10, 1);
+    lcd_putc(':');
+
+    itoa(seconds, string, 10);  // Convert decimal value to string
+    lcd_gotoxy(11, 1);
+      
+    if (seconds < 10)
+    {
+      lcd_putc('0');
+    }
+    lcd_puts(string);
+
+    lcd_gotoxy(13, 1);
+    lcd_putc('.');
+         
+    itoa(tenths, string, 10);  // Convert decimal value to string
+    lcd_gotoxy(14, 1);
+    lcd_puts(string);
   // start the alarm clock with pressed button
     if (cnt_en==0)
     {
       no_of_overflows++;
+      
+      if (tenths <= 1 && seconds == 0 && minutes == 0)
+        {
+          lcd_gotoxy(8, 1);
+          lcd_putc('00:00.0');
+        }
+      
+      
+      else 
+      {
+      
       if (no_of_overflows >= 6)
       {
           // Do this every 6 x 16 ms = 100 ms
@@ -303,49 +339,13 @@ ISR(TIMER0_OVF_vect)
             {
               seconds = 59;
               minutes--;
-              if (minutes == 0 && seconds == 0 && tenths == 0)
-              {
-                
-              }
             }
-          } 
-
-        if (tenths == 0 && seconds == 0 && minutes == 0)
-        {
-          lcd_gotoxy(8, 1);
-          lcd_putc('00:00.0');
-        }
-      }      
-      
-      itoa(minutes, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(8, 1);
-      if (minutes < 10)
-      { 
-        lcd_putc('0');
+          }
       }
-      lcd_puts(string);
       
-      lcd_gotoxy(10, 1);
-      lcd_putc(':');
-
-      itoa(seconds, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(11, 1);
-      
-      if (seconds < 10)
-      {
-        lcd_putc('0');
       }
-      lcd_puts(string);
 
-      lcd_gotoxy(13, 1);
-      lcd_putc('.');
-          
-      itoa(tenths, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(14, 1);
-      lcd_puts(string);
-
-        
-
+      
       
         uint8_t led_value = LOW;  // Local variable to keep LED status
         
@@ -353,7 +353,7 @@ ISR(TIMER0_OVF_vect)
         pinMode(LED_RED, OUTPUT);
 
         // Infinite loop
-        if (tenths == 0 && seconds == 0 && minutes == 0)  
+        if (tenths == 1 && seconds == 0 && minutes == 0)  
         {
          // Change LED value
           if (led_value == LOW)
@@ -367,12 +367,13 @@ ISR(TIMER0_OVF_vect)
         }
     }
 
+    /*
     if (seconds == 0 && minutes == 0)
       {
         cnt_en == 1;
       }
     cnt_en = cnt_en;
-
+    */
 
       /* Encoder routines -------------------------------------------------*/
       /**********************************************************************

@@ -206,6 +206,12 @@ ISR(TIMER2_OVF_vect)
         {
           seconds = 0;
           minutes++;
+          
+          if (minutes > 59)
+          {
+            minutes = 0;
+          }
+          
         }    
       }
         
@@ -248,17 +254,17 @@ ISR(TIMER2_OVF_vect)
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t no_of_overflows = 0;
-    static uint8_t tenths = 9;  // Tenths of a second
+    static uint8_t tenths = 9;    // Tenths of a second
     static uint8_t seconds = 1;   
     static uint8_t minutes = 0;
-    char string[2];             // String for converted numbers by itoa()
-    uint8_t led_value = LOW;  // Local variable to keep LED status
-
-    // reading the state of the button on encoder
-  
-  /*  with the change of the state from 1 to 0, the alarm clock is started 
-      and with the change from 0 to 1 we stop the alarm clock
-  */
+    uint8_t led_value = LOW;      // Local variable to keep LED status
+    char string[2];               // String for converted numbers by itoa()
+    pinMode(LED_RED, OUTPUT);     // Set pin where on-board LED is connected as output
+        
+  // reading the state of the button on encoder
+  // with the change of the state from 1 to 0, the alarm clock is started 
+  // and with the change from 0 to 1 we stop the alarm clock
+ 
 
     cs_en = GPIO_read(&PINB,EN_SW);
     if (cs_en!=ls_en)
@@ -352,61 +358,55 @@ ISR(TIMER0_OVF_vect)
   // start the alarm clock with pressed button
     if (cnt_en==0)
     {
-      no_of_overflows++;
-      
+      // if the LED was on, turn it off
       if (led_value == HIGH)
       {
         led_value = LOW;
-      }     
+      } 
+      digitalWrite(LED_RED, led_value);
 
       
+      no_of_overflows++;
+      
+      // zastaveni pri vyprseni casu
       if (tenths == 1 && seconds == 0 && minutes == 0)
       {
         lcd_gotoxy(8, 1);
-        lcd_putc('00:00.0');
+        lcd_putc('00:00');
+
+        // Turn the LED off if the alarm clock runs up
+        if (led_value == LOW)
+          led_value = HIGH;
+        else
+        led_value = LOW;
+        // Pause several milliseconds  //_delay_ms(SHORT_DELAY);
+        // Turn ON/OFF on-board LED
+        digitalWrite(LED_RED, led_value);
+        
       }
-            
+
+      // odcitani      
       else 
       {
         if (no_of_overflows >= 6)
         {
-          // Do this every 6 x 16 ms = 100 ms
           no_of_overflows = 0;
-          tenths--;  
+          tenths--;
 
-          if(tenths == 0)
-          { 
+          if (tenths == 0)
+          {
             tenths = 9;
             seconds--;
 
-            if (seconds == 0 && tenths == 0)
+            if (tenths == 1 && seconds == 0)
             {
               seconds = 59;
               minutes--;
-            }   
+            }
           }
         }
-      
       }
-          
         
-        
-        // Set pin where on-board LED is connected as output
-        pinMode(LED_RED, OUTPUT);
-
-        // Infinite loop
-        if (tenths == 1 && seconds == 0 && minutes == 0)  
-        {
-         // Change LED value
-          if (led_value == LOW)
-            led_value = HIGH;
-          else
-          led_value = LOW;
-          // Pause several milliseconds
-          //_delay_ms(SHORT_DELAY);
-          // Turn ON/OFF on-board LED
-          digitalWrite(LED_RED, led_value);
-        }
         
     }
 
@@ -429,10 +429,6 @@ ISR(TIMER0_OVF_vect)
       //{
         
       //}
-    
-
-      
-    
 }
 
 ISR(TIMER1_OVF_vect)

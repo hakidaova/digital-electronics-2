@@ -299,14 +299,22 @@ ISR(TIMER0_OVF_vect)
           { tenths = 9;
             seconds--;
 
-            if (seconds == 0)
+            if (seconds == 0 && tenths == 0)
             {
               seconds = 59;
               minutes--;
-
+              if (minutes == 0 && seconds == 0 && tenths == 0)
+              {
+                
+              }
             }
           } 
 
+        if (tenths == 0 && seconds == 0 && minutes == 0)
+        {
+          lcd_gotoxy(8, 1);
+          lcd_putc('00:00.0');
+        }
       }      
       
       itoa(minutes, string, 10);  // Convert decimal value to string

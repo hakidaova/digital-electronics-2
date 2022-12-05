@@ -249,7 +249,6 @@ ISR(TIMER2_OVF_vect)
       lcd_puts(string);
       }
   }    
-  
 }
 
 
@@ -286,10 +285,6 @@ ISR(TIMER0_OVF_vect)
           cnt_en--;
         }
       }
-      
-      // itoa(cnt_en, string, 10);
-      // lcd_gotoxy(6, 1);
-      // lcd_puts(string);
     }
 
     ls_en=cs_en;
@@ -356,6 +351,7 @@ ISR(TIMER0_OVF_vect)
         }
       }
     }
+
     ls_en_r = cs_en_r;
     // sekundy a minuty se pridavaji zaroven, takze to by asi chtelo zmenit ale idk jak
     
@@ -407,26 +403,9 @@ ISR(TIMER0_OVF_vect)
               minutes--;
             }
           }
-          
         }
-
-      }
-        
-        
+      }       
     }
-
-
-      /* Encoder routines -------------------------------------------------*/
-      /**********************************************************************
-      * Function: něco
-      * Purpose:  vymyslíme
-      **********************************************************************/
-      //EN_state = GPIO_read(&PIN,EN_SW);
-
-      //if(EN_state >= 9)
-      //{
-        
-      //}
 }
 
 ISR(ADC_vect)
@@ -463,37 +442,8 @@ ISR(ADC_vect)
   }
 }
 
-
 //ISR(TIMER1_OVF_vect)
 //{}
 
-/* Joystick routines -------------------------------------------------*/
-/**********************************************************************
- * Function: Joystick positioning
- * Purpose:  Moving the cursor according to the joystick position.
- **********************************************************************/
-// const int SW_pin = 2; // digital pin connected to SW
-/*
-const int VRx = 0; // analog pin connected to VRx
-const int VRy = 1; // analog pin connected to VRy
-
-void setup() 
-{
-  pinMode(SW_pin, INPUT);
-  digitalWrite(SW_pin, HIGH);
-  Serial.begin(9600);
-}
-
-void loop() 
-{
-  Serial.print("X: ");
-  Serial.print(analogRead(VRx));
-  Serial.print(" Y: ");
-  Serial.print(analogRead(VRy));
-  Serial.print(" Z: ");
-  Serial.println(digitalRead(SW_pin));
-  delay(250);
-}
-*/
 
 

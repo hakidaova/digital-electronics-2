@@ -126,8 +126,8 @@ int main(void)
   TIM2_overflow_interrupt_enable();
   TIM0_overflow_16ms();
   TIM0_overflow_interrupt_enable();
-  TIM1_overflow_4ms();
-  TIM1_overflow_interrupt_enable();
+  //TIM1_overflow_4ms();
+  //TIM1_overflow_interrupt_enable();
 
 
     // Enables interrupts by setting the global interrupt mask
@@ -171,6 +171,8 @@ ISR(TIMER2_OVF_vect)
   /*  with the change of the state from 1 to 0, the stopwatch is started 
       and with the change from 0 to 1 we stop the stopwatch
   */
+
+ 
   
   // lcd_gotoxy(6, 0);
   cs_js = GPIO_read(&PIND,JS_SW);
@@ -186,11 +188,7 @@ ISR(TIMER2_OVF_vect)
         {
           cnt_ls--;
         }
-      }
-
-      itoa(cnt_ls, string, 10);
-      lcd_gotoxy(6, 0);
-      lcd_puts(string);
+      }     
     }
 
   ls_js=cs_js;
@@ -262,9 +260,9 @@ ISR(TIMER2_OVF_vect)
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t no_of_overflows = 0;
-    static uint8_t tenths = 9;    // Tenths of a second
-    static uint8_t seconds = 1;   
-    static uint8_t minutes = 0;
+    static int8_t tenths = 0;    // Tenths of a second
+    static int8_t seconds = 0;   
+    static int8_t minutes = 0;
     uint8_t led_value = LOW;      // Local variable to keep LED status
     char string[2];               // String for converted numbers by itoa()
     pinMode(LED_RED, OUTPUT);     // Set pin where on-board LED is connected as output
@@ -331,32 +329,30 @@ ISR(TIMER0_OVF_vect)
     {
       if(GPIO_read(&PINB, EN_DT) != cs_en_r)
       {
-        minutes++;          // pridavani minut
-        if (minutes>59)     // kdyz vetsi nez 59 tak zpet na 0
-        {
-          minutes = 0;    
-        }
-        
         seconds++;          // pridavani sekund
         if (seconds>59)     // zas kdyz vetsi nez 59 tak zpet na 0
         {
           seconds = 0;
+          minutes++;          // pridavani minut
+          if (minutes>59)     // kdyz vetsi nez 59 tak zpet na 0
+          {
+            minutes = 0;    
+          }
         }
         
       }
 
       else                   // kdyz tocim doleva
       {
-        minutes--;           // odcitam minuty
-        if (minutes == 0)    // toto nevim jak jinak udelat funguje to jak hovno
-        {
-          minutes = 59;
-        }
-        
         seconds--;          // stejne jak minuty, nejak random to funguje 
-        if (seconds < 1)
+        if (seconds == -1)
         {
           seconds = 59;
+          minutes--;           // odcitam minuty
+          if (minutes == -1)    // toto nevim jak jinak udelat funguje to jak hovno
+          {
+            minutes = 59;
+          }
         }
       }
     }
@@ -377,7 +373,7 @@ ISR(TIMER0_OVF_vect)
       no_of_overflows++;
       
       // zastaveni pri vyprseni casu
-      if (tenths == 1 && seconds == 0 && minutes == 0)
+      if (tenths == 0 && seconds == 0 && minutes == 0)
       {
         lcd_gotoxy(8, 1);
         lcd_putc('00:00');
@@ -387,7 +383,6 @@ ISR(TIMER0_OVF_vect)
           led_value = HIGH;
         else
         led_value = LOW;
-        // Pause several milliseconds  //_delay_ms(SHORT_DELAY);
         // Turn ON/OFF on-board LED
         digitalWrite(LED_RED, led_value);
         
@@ -396,35 +391,30 @@ ISR(TIMER0_OVF_vect)
       // odcitani      
       else 
       {
-        if (no_of_overflows >= 6)
+        if (no_of_overflows >=  6)
         {
           no_of_overflows = 0;
           tenths--;
 
-          if (tenths == 0)
-          {
+          if (tenths < 0)
+          { 
             tenths = 9;
             seconds--;
 
-            if (tenths == 1 && seconds == 0)
+            if (seconds < 0)
             {
               seconds = 59;
               minutes--;
             }
           }
+          
         }
+
       }
         
         
     }
 
-    /*
-    if (seconds == 0 && minutes == 0)
-      {
-        cnt_en == 1;
-      }
-    cnt_en = cnt_en;
-    */
 
       /* Encoder routines -------------------------------------------------*/
       /**********************************************************************

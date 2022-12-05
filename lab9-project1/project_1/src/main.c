@@ -32,7 +32,7 @@
 #define JS_VRy PC1  // PC1 is where the VRy pin of the joystick is connected
 
 // pin for LED
-#define LED_RED PB5 // PB5 is where the LED diode is connected
+#define LED_RED PC5 // PC5 is where the LED diode is connected
 
 // pin for rotary encoder
 #define EN_SW PB2   // PB2 is an AVR pin where the button of the encoder is connected
@@ -57,7 +57,7 @@
 // This part is needed to use Arduino functions but also physical pin
 // names. We are using Arduino-style just to simplify the first lab.
 #include "Arduino.h"
-#define PB5 13              // In Arduino world, PB5 is called "13"
+#define PC5 19              // In Arduino world, PC5 is called "19"
 
 
 

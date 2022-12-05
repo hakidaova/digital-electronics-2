@@ -1,16 +1,16 @@
 <circuit version="1.0.0-RC3" rev="1148" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
 
-<item itemtype="Ground" CircId="Ground-49" mainComp="false" Show_id="false" Show_Val="false" Pos="-300,44" rotation="0" hflip="1" vflip="1" label="Ground-49" idLabPos="-16,8" labelrot="0" valLabPos="0,0" valLabRot="0" />
+<item itemtype="Ground" CircId="Ground-49" mainComp="false" Show_id="false" Show_Val="false" Pos="-36,-100" rotation="0" hflip="1" vflip="1" label="Ground-49" idLabPos="-16,8" labelrot="0" valLabPos="0,0" valLabRot="0" />
 
-<item itemtype="Led" CircId="Led-47" mainComp="false" Show_id="true" Show_Val="false" Pos="-300,4" rotation="90" hflip="1" vflip="1" label="Led_1" idLabPos="-7.62535,40.3802" labelrot="-90" valLabPos="0,0" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="0.03 A" Resistance="0.6 Ω" />
+<item itemtype="Led" CircId="Led-47" mainComp="false" Show_id="true" Show_Val="false" Pos="-36,-148" rotation="90" hflip="1" vflip="1" label="Led" idLabPos="-6.0551,28.865" labelrot="-90" valLabPos="0,0" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="0.03 A" Resistance="0.6 Ω" />
 
-<item itemtype="Resistor" CircId="Resistor-46" mainComp="false" ShowProp="Resistance" Show_id="true" Show_Val="true" Pos="-300,-52" rotation="-90" hflip="1" vflip="1" label="RL" idLabPos="12.6005,7.74104" labelrot="-270" valLabPos="1.79614,8.09366" valLabRot="-270" Resistance="270 Ω" />
+<item itemtype="Resistor" CircId="Resistor-46" mainComp="false" ShowProp="Resistance" Show_id="true" Show_Val="true" Pos="-36,-200" rotation="-90" hflip="1" vflip="1" label="RL" idLabPos="12.6005,7.74104" labelrot="-270" valLabPos="1.79614,8.09366" valLabRot="-270" Resistance="270 Ω" />
 
 <item itemtype="Ground" CircId="Ground-10" mainComp="false" Show_id="false" Show_Val="false" Pos="-356,-260" rotation="0" hflip="1" vflip="1" label="Ground-10" idLabPos="-16,8" labelrot="0" valLabPos="0,0" valLabRot="0" />
 
-<item itemtype="Hd44780" CircId="Hd44780-2" mainComp="false" Show_id="true" Show_Val="false" Pos="-380,-300" rotation="0" hflip="1" vflip="1" label="Hd44780-2" idLabPos="70,-82" labelrot="0" valLabPos="0,0" valLabRot="0" Rows="2 _Rows" Cols="16 _Columns" />
+<item itemtype="Hd44780" CircId="Hd44780-2" mainComp="false" Show_id="true" Show_Val="false" Pos="-380,-300" rotation="0" hflip="1" vflip="1" label="Hd44780" idLabPos="70,-82" labelrot="0" valLabPos="0,0" valLabRot="0" Rows="2 _Rows" Cols="16 _Columns" />
 
-<item itemtype="Subcircuit" CircId="Uno-1" mainComp="false" Show_id="true" Show_Val="false" Pos="-264,-272" rotation="0" hflip="1" vflip="1" label="Arduino Uno-1" idLabPos="50,-12" labelrot="0" valLabPos="0,0" valLabRot="0" Logic_Symbol="false">
+<item itemtype="Subcircuit" CircId="Uno-1" mainComp="false" Show_id="true" Show_Val="false" Pos="-264,-272" rotation="0" hflip="1" vflip="1" label="Arduino Uno" idLabPos="50,-12" labelrot="0" valLabPos="0,0" valLabRot="0" Logic_Symbol="false">
 <mainCompProps itemtype="MCU" CircId="1_mega328-109" mainComp="true" Show_id="false" Show_Val="false" Pos="20,20" rotation="0" hflip="1" vflip="1" label="1_mega328-109" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Program="../.pio/build/uno/firmware.hex" Auto_Load="false" Rst_enabled="true" Ext_Osc="true" Wdt_enabled="false" />
 </item>
 
@@ -44,10 +44,10 @@
 
 <item itemtype="Connector" uid="connector-62" startpinid="KY040-30-clk" endpinid="Uno-1-12" pointList="-380,-52,-396,-52,-396,-92,-268,-92,-268,-152,-256,-152" />
 
-<item itemtype="Connector" uid="connector-63" startpinid="Uno-1-13" endpinid="Resistor-46-rPin" pointList="-256,-144,-300,-144,-300,-68" />
+<item itemtype="Connector" uid="Connector-66" startpinid="Uno-1-A5" endpinid="Resistor-46-rPin" pointList="-112,-256,-36,-256,-36,-216" />
 
-<item itemtype="Connector" uid="connector-64" startpinid="Resistor-46-lPin" endpinid="Led-47-lPin" pointList="-300,-36,-300,-12" />
+<item itemtype="Connector" uid="Connector-67" startpinid="Resistor-46-lPin" endpinid="Led-47-lPin" pointList="-36,-184,-36,-164" />
 
-<item itemtype="Connector" uid="connector-65" startpinid="Led-47-rPin" endpinid="Ground-49-Gnd" pointList="-300,20,-300,28" />
+<item itemtype="Connector" uid="Connector-68" startpinid="Led-47-rPin" endpinid="Ground-49-Gnd" pointList="-36,-132,-36,-116" />
 
 </circuit>

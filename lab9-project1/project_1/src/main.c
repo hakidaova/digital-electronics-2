@@ -371,9 +371,6 @@ ISR(TIMER0_OVF_vect)
       // zastaveni pri vyprseni casu
       if (tenths == 0 && seconds == 0 && minutes == 0)
       {
-        lcd_gotoxy(8, 1);
-        lcd_putc('00:00');
-
         // Turn the LED off if the alarm clock runs up
         if (led_value == LOW)
           led_value = HIGH;

@@ -84,8 +84,8 @@ int main(void)
     GPIO_mode_input_pullup(&DDRD,JS_SW); 
     GPIO_mode_input_pullup(&DDRB,EN_SW);
 
-    GPIO_mode_input_nopull(&DDRB,EN_DT);
-    GPIO_mode_input_nopull(&DDRB,EN_CLK);
+    GPIO_mode_input_pullup(&DDRB,EN_DT);
+    GPIO_mode_input_pullup(&DDRB,EN_CLK);
 
     /*-------- Initialize display --------*/
     lcd_init(LCD_DISP_ON);

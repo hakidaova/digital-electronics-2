@@ -44,5 +44,5 @@ Insert a link to a short video with your practical implementation example (1-3 m
 ## References
 
 1. [Encoder](https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/?fbclid=IwAR2GDmzOCwF2mUCt-pVNGLNIA0n9qdLGAsA48_TlhPRhTdYTlosFNacai3k)
-2. ...
+2. [LCD display] (https://digilent.com/reference/_media/reference/pmod/pmodclp/pmodclp_rm.pdf)
 

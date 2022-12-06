@@ -63,12 +63,14 @@
 
 /*----- Define global variables -----*/
 
+uint16_t x, y;
 uint8_t ls_js, cs_js;             // last state, current state
 uint8_t ls_en, cs_en;             // last state and current state of the button of the encoder 
 uint8_t ls_en_r, cs_en_r;         // last and current state of the encoder
 int8_t cnt_js = 0;
 int8_t cnt_en = 0;
 int8_t cnt_en_r = 0;
+
 
 
 
@@ -156,7 +158,11 @@ int main(void)
  * Purpose:  Update the stopwatch on LCD screen every sixth overflow,
  *           ie approximately every 100 ms (6 x 16 ms = 100 ms).
  **********************************************************************/
-
+ISR(TIMER1_OVF_vect)
+{
+    // Start ADC conversion
+    ADCSRA = ADCSRA | (1<<ADSC);
+}
 
 
 /*----------------- STOPWATCH ------------------------*/
@@ -196,60 +202,71 @@ ISR(TIMER2_OVF_vect)
 
   // start the stopwatch with pressed button
   if(cnt_js==0)
-  {  
-    no_of_overflows++;
-    if (no_of_overflows >= 6)
+  { 
+    if (x == 511 && y == 511)
     {
-      // Do this every 6 x 16 ms = 100 ms
-      no_of_overflows = 0;
-      tenths++;  
-
-      if(tenths > 9)
-      { 
-        tenths = 0;
-        seconds++;
-
-        if (seconds > 59)
-        {
-          seconds = 0;
-          minutes++;
-          
-          if (minutes > 59)
+      no_of_overflows++;
+          if (no_of_overflows >= 6)
           {
-            minutes = 0;
+            // Do this every 6 x 16 ms = 100 ms
+            no_of_overflows = 0;
+            tenths++;  
+
+            if(tenths > 9)
+            { 
+              tenths = 0;
+              seconds++;
+
+              if (seconds > 59)
+              {
+                seconds = 0;
+                minutes++;
+                
+                if (minutes > 59)
+                {
+                  minutes = 0;
+                }
+                
+              }    
+            }
+              
+            itoa(minutes, string, 10);  // Convert decimal value to string
+            lcd_gotoxy(8, 0);
+            
+            if (minutes < 10)
+            { 
+              lcd_putc('0');
+            }
+            
+            lcd_puts(string);
+            lcd_gotoxy(10, 0);
+            lcd_putc(':');
+            itoa(seconds, string, 10);  // Convert decimal value to string
+            lcd_gotoxy(11, 0);
+            
+            if (seconds < 10)
+            {
+            lcd_putc('0');
+            }
+            
+            lcd_puts(string);
+            lcd_gotoxy(13, 0);
+            lcd_putc('.');
+            
+            itoa(tenths, string, 10);  // Convert decimal value to string
+            lcd_gotoxy(14, 0);
+            lcd_puts(string);
           }
-          
-        }    
-      }
-        
-      itoa(minutes, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(8, 0);
-      
-      if (minutes < 10)
-      { 
-        lcd_putc('0');
-      }
-      
-      lcd_puts(string);
-      lcd_gotoxy(10, 0);
-      lcd_putc(':');
-      itoa(seconds, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(11, 0);
-      
-      if (seconds < 10)
-      {
-      lcd_putc('0');
-      }
-      
-      lcd_puts(string);
-      lcd_gotoxy(13, 0);
-      lcd_putc('.');
-      
-      itoa(tenths, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(14, 0);
-      lcd_puts(string);
+    }    
+    else
+    {
+      lcd_gotoxy(8,0);
+      lcd_putc('00:00.0');
     }
-  }    
+    
+  }
+  
+    
 }
 
 
@@ -406,16 +423,11 @@ ISR(TIMER0_OVF_vect)
     }
 }
 
-ISR(TIMER1_OVF_vect)
-{
-    // Start ADC conversion
-    ADCSRA = ADCSRA | (1<<ADSC);
-}
+
 
 
 ISR(ADC_vect)
-{ 
-  uint16_t x, y;
+{
   static uint8_t channel = 0;
   char string[4];             // String for converted numbers by itoa()
 
@@ -431,6 +443,12 @@ ISR(ADC_vect)
     lcd_puts(string);
     channel++;
     
+    if (x!=511)
+    {
+      lcd_gotoxy(8,0);
+      lcd_putc('00:00.0');
+    }
+    
   }
 
   else if(channel == 1)
@@ -445,13 +463,12 @@ ISR(ADC_vect)
     lcd_gotoxy(5,1);
     lcd_puts(string);
     channel = 0;
-    
-  }
- 
-  if (x != 511 && y != 511)
-  {
-    lcd_gotoxy(8, 0);
-    lcd_putc('00:00.0');
+
+    if (y!=511)
+    {
+      lcd_gotoxy(8,0);
+      lcd_putc('00:00.0');
+    } 
   }
   
 }

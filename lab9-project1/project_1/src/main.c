@@ -260,8 +260,35 @@ ISR(TIMER2_OVF_vect)
     }    
     else
     {
-      lcd_gotoxy(8,0);
-      lcd_putc('00:00.0');
+      minutes = minutes - minutes;
+      seconds = seconds - seconds;
+      tenths = tenths - tenths;
+      itoa(minutes, string, 10);  // Convert decimal value to string
+      lcd_gotoxy(8, 0);
+            
+      if (minutes < 10)
+      { 
+        lcd_putc('0');
+      }
+            
+      lcd_puts(string);
+      lcd_gotoxy(10, 0);
+      lcd_putc(':');
+      itoa(seconds, string, 10);  // Convert decimal value to string
+      lcd_gotoxy(11, 0);
+            
+      if (seconds < 10)
+      {
+        lcd_putc('0');
+      }
+            
+      lcd_puts(string);
+      lcd_gotoxy(13, 0);
+      lcd_putc('.');
+            
+      itoa(tenths, string, 10);  // Convert decimal value to string
+      lcd_gotoxy(14, 0);
+      lcd_puts(string);
     }
     
   }
@@ -441,14 +468,7 @@ ISR(ADC_vect)
     lcd_puts("   ");
     lcd_gotoxy(5,0);
     lcd_puts(string);
-    channel++;
-    
-    if (x!=511)
-    {
-      lcd_gotoxy(8,0);
-      lcd_putc('00:00.0');
-    }
-    
+    channel++;    
   }
 
   else if(channel == 1)
@@ -462,13 +482,7 @@ ISR(ADC_vect)
     lcd_puts("   ");
     lcd_gotoxy(5,1);
     lcd_puts(string);
-    channel = 0;
-
-    if (y!=511)
-    {
-      lcd_gotoxy(8,0);
-      lcd_putc('00:00.0');
-    } 
+    channel = 0; 
   }
   
 }

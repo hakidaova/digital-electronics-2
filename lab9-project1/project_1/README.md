@@ -22,7 +22,8 @@ For our purposes, we use:
 
 <a name="ArduinoUNO"></a>
 ### Arduino UNO
-bflmpsvz
+
+![Arduino UNO](https://upload.wikimedia.org/wikipedia/commons/b/b8/ArduinoUNO.png)
 
 <a name="LCDmodule"></a>
 ### LCD module

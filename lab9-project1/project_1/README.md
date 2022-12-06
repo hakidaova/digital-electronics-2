@@ -23,6 +23,7 @@ See our [wiring here](#Wiring)
 
 <a name="ArduinoUNO"></a>
 ### Arduino UNO
+Arduino UNO board with implemented microcontroller ATmega328 is our main component in this project. It has 14 digital GPIO input/output pins (6 PWM), 6 analog input pins, 16 MHz ceramic oscillator, a USB port which can be used as UART and a lot more.
 
 ![Arduino UNO](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/arduino.jpeg)
 
@@ -67,7 +68,6 @@ Insert descriptive text and schematic(s) of your implementation.
 
 <a name="Flowcharts"></a>
 ### Flowcharts
-bflmpsvz
 
 <a name="Stopwatch"></a>
 #### Stopwatch flowchart
@@ -92,7 +92,6 @@ bflmpsvz
 
 <a name="Libraries"></a>
 ### Libraries
-bflmpsvz
 
 <a name="Description"></a>
 #### Description

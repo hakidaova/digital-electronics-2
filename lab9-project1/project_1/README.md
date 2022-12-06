@@ -66,10 +66,6 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 ![Wiring](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/simulIde_schematic.png)
 > **Note:** Picture was created by [SimulIDE](https://www.simulide.com/p/home.html).
 
-Insert descriptive text and schematic(s) of your implementation.
-
-
-
 <a name="Software"></a>
 ## Software description
 
@@ -117,9 +113,23 @@ Insert descriptive text and schematic(s) of your implementation.
 
 <a name="Description"></a>
 #### Description
+1. GPIO
+2. LCD
+3. TIMER
+4. SOURCE
 
 <a name="Sourcefiles"></a>
 #### Source files
+1. GPIO
+   * [gpio.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/gpio.h)
+   * [gpio.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/gpio.c)
+2. LCD
+   * [lcd.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/lcd.c)
+   * [lcd.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd.h)
+   * [lcd_definitions.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd_definitions.h)
+3. TIMER
+   * [timer.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/include/timer.h)
+5. SOURCE
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 

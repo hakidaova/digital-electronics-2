@@ -45,8 +45,8 @@ It is supplied by up to 5 V. The LCD shows us the times for both stopwatch and t
 
 <a name="Analogjoystick"></a>
 ### Analog joystick
-![Analog joystick](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/joy-stick.jpg)
 The analog joystick has 2 ADC channels which allow us to control processes in 2 directions and to read them as X, Y coordinates thanks to VRx and VRy pins. We used its SW pin as a button for starting/stopping our stopwatch.
+![Analog joystick](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/joy-stick.jpg)
 
 <a name="Rotaryencoder"></a>
 ### Rotary encoder

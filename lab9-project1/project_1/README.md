@@ -46,6 +46,7 @@ See our [wiring here](#Wiring)
 <a name="Wiring"></a>
 ### Complete wiring of the system
 ![Wiring](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/simulIde_schematic.png)
+> **Note:** Picture was created by [SimulIDE](https://www.simulide.com/p/home.html).
 
 Insert descriptive text and schematic(s) of your implementation.
 

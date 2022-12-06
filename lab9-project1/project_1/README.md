@@ -13,8 +13,7 @@ The result of our project contains user-launched stopwatch and timer displayed o
 
 ## Hardware description
 
-For our purposes, we use:
-* [Arduino UNO](#ArduinoUNO)
+For our purposes, we use [Arduino UNO](#ArduinoUNO) that connects:
 * [LCD module](#LCDmodule)
 * [Analog joystick](#Analogjoystick)
 * [Rotary encoder](#Rotaryencoder)
@@ -24,12 +23,17 @@ See our [wiring here](#Wiring)
 
 <a name="ArduinoUNO"></a>
 ### Arduino UNO
+Arduino UNO board with implemented microcontroller ATmega328 is our main component in this project. It has 14 digital GPIO input/output pins (6 PWM), 6 analog input pins, 16 MHz ceramic oscillator, a USB port which can be used as UART and a lot more.
 
 ![Arduino UNO](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/arduino.jpeg)
+
+> **Note:** For more information about the board see the [manual](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf).
 
 <a name="LCDmodule"></a>
 ### LCD module
 ![LCD module](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/LCD.png)
+LCD module used in our project is the one with dot matrix liquid crystal display controller HD44780. The display itself has 32 individual positions for characters (predefined or custom) equally divided into 2 rows.
+It is supplied by up to 5 V. 
 
 <a name="Analogjoystick"></a>
 ### Analog joystick
@@ -68,7 +72,6 @@ Insert descriptive text and schematic(s) of your implementation.
 
 <a name="Flowcharts"></a>
 ### Flowcharts
-bflmpsvz
 
 <a name="Stopwatch"></a>
 #### Stopwatch flowchart
@@ -93,7 +96,6 @@ bflmpsvz
 
 <a name="Libraries"></a>
 ### Libraries
-bflmpsvz
 
 <a name="Description"></a>
 #### Description

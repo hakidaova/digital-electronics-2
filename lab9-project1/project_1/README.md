@@ -14,10 +14,10 @@ The result of our project contains user-launched stopwatch and timer displayed o
 ## Hardware description
 
 For our purposes, we use [Arduino UNO](#ArduinoUNO) that connects:
-  * [LCD module](#LCDmodule)
-  * [Analog joystick](#Analogjoystick)
-  * [Rotary encoder](#Rotaryencoder)
-  * [LED diode](#LEDdiode)
+* [LCD module](#LCDmodule)
+* [Analog joystick](#Analogjoystick)
+* [Rotary encoder](#Rotaryencoder)
+* [LED diode](#LEDdiode)
 
 See our [wiring here](#Wiring)
 

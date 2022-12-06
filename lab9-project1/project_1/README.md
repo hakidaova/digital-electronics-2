@@ -9,8 +9,13 @@ The result of our project contains user-launched stopwatch and timer displayed o
 * Daová Hana
 * Foltyn Ondřej
 
-## Table of contents (?)
+## Table of contents
+* [Hardware](#Hardware)
+* [Software](#Software)
+* [Video](#Video)
+* [References](#References)
 
+<a name="Hardware"></a>
 ## Hardware description
 
 For our purposes, we use [Arduino UNO](#ArduinoUNO) that connects:
@@ -31,9 +36,12 @@ Arduino UNO board with implemented microcontroller ATmega328 is our main compone
 
 <a name="LCDmodule"></a>
 ### LCD module
-![LCD module](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/LCD.png)
 LCD module used in our project is the one with dot matrix liquid crystal display controller HD44780. The display itself has 32 individual positions for characters (predefined or custom) equally divided into 2 rows.
 It is supplied by up to 5 V. 
+
+![LCD module](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/LCD.png)
+
+> **Note:** For more about the Digilent PmodCLP LCD see the [manual](https://digilent.com/reference/_media/reference/pmod/pmodclp/pmodclp_rm.pdf).
 
 <a name="Analogjoystick"></a>
 ### Analog joystick
@@ -45,7 +53,7 @@ It is supplied by up to 5 V.
 
 <a name="LEDdiode"></a>
 ### LED diode
-![LED diode]()
+![LED diode](vyfotit)
 
 <a name="Wiring"></a>
 ### Complete wiring of the system
@@ -56,7 +64,7 @@ Insert descriptive text and schematic(s) of your implementation.
 
 
 
-
+<a name="Software"></a>
 ## Software description
 
 * [Flowcharts](#Flowcharts) for:
@@ -72,6 +80,10 @@ Insert descriptive text and schematic(s) of your implementation.
 
 <a name="Flowcharts"></a>
 ### Flowcharts
+
+<a name="ADC_conversion"></a>
+#### ADC conversion flowchart
+![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/ADC_conv.drawio.png)
 
 <a name="Stopwatch"></a>
 #### Stopwatch flowchart
@@ -125,11 +137,12 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
    └── README.md       // Report of this project
    ```
 
-
+<a name="Video"></a>
 ## Video
 
 Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
 
+<a name="References"></a>
 ## References
 
 1. [Encoder](https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/?fbclid=IwAR2GDmzOCwF2mUCt-pVNGLNIA0n9qdLGAsA48_TlhPRhTdYTlosFNacai3k)

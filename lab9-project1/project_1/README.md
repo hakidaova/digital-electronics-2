@@ -32,6 +32,8 @@ Arduino UNO board with implemented microcontroller ATmega328 is our main compone
 <a name="LCDmodule"></a>
 ### LCD module
 ![LCD module](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/LCD.png)
+LCD module used in our project is the one with dot matrix liquid crystal display controller HD44780. The display itself has 32 individual positions for characters (predefined or custom) equally divided into 2 rows.
+It is supplied by up to 5 V. 
 
 <a name="Analogjoystick"></a>
 ### Analog joystick

@@ -54,8 +54,7 @@
 #include <stdlib.h>         // C library. Needed for number conversions
 
 // -----
-// This part is needed to use Arduino functions but also physical pin
-// names. We are using Arduino-style just to simplify the first lab.
+// This part is needed to use Arduino functions but also physical pin names.
 #include "Arduino.h"
 #define PC5 19              // In Arduino world, PC5 is called "19"
 
@@ -63,11 +62,11 @@
 
 /*----- Define global variables -----*/
 
-uint16_t x, y;
-uint8_t ls_js, cs_js;             // last state, current state
-uint8_t ls_en, cs_en;             // last state and current state of the button of the encoder 
-uint8_t ls_en_r, cs_en_r;         // last and current state of the encoder
-int8_t cnt_js = 0;
+uint16_t x, y;                    // coordinates x, y
+uint8_t ls_js, cs_js;             // last state, current state of joystick button
+uint8_t ls_en, cs_en;             // last state, current state of encoder button
+uint8_t ls_en_r, cs_en_r;         // last state, current state of the rotary encoder
+int8_t cnt_js = 0;                
 int8_t cnt_en = 0;
 int8_t cnt_en_r = 0;
 
@@ -124,15 +123,18 @@ int main(void)
     // Configuration of 8-bit Timer/Counter2 for Stopwatch update
     // Set the overflow prescaler to 16 ms and enable interrupt
 
-  TIM2_overflow_16ms();
-  TIM2_overflow_interrupt_enable();
-  TIM0_overflow_16ms();
-  TIM0_overflow_interrupt_enable();
+    TIM2_overflow_16ms();
+    TIM2_overflow_interrupt_enable();
+    
+    // Configuration of 8-bit Timer/Counter0 for Timer update
+    // Set the overflow prescaler to 16 ms and enable interrupt    
+    TIM0_overflow_16ms();
+    TIM0_overflow_interrupt_enable();
   
-  // Configure 16-bit Timer/Counter1 to start ADC conversion
-  // Set prescaler to 33 ms and enable overflow interrupt
-  TIM1_overflow_33ms();
-  TIM1_overflow_interrupt_enable();
+    // Configure 16-bit Timer/Counter1 to start ADC conversion
+    // Set prescaler to 33 ms and enable overflow interrupt
+    TIM1_overflow_33ms();
+    TIM1_overflow_interrupt_enable();
 
 
     // Enables interrupts by setting the global interrupt mask
@@ -158,6 +160,7 @@ int main(void)
  * Purpose:  Update the stopwatch on LCD screen every sixth overflow,
  *           ie approximately every 100 ms (6 x 16 ms = 100 ms).
  **********************************************************************/
+
 ISR(TIMER1_OVF_vect)
 {
     // Start ADC conversion
@@ -337,14 +340,14 @@ ISR(TIMER0_OVF_vect)
 
     if (cs_en_r != ls_en_r && cs_en_r == 1)
     {
-      if(GPIO_read(&PINB, EN_DT) != cs_en_r)
+      if(GPIO_read(&PINB, EN_DT) != cs_en_r) //rotating clockwise
       {
-        seconds++;          // pridavani sekund
-        if (seconds>59)     // zas kdyz vetsi nez 59 tak zpet na 0
+        seconds++;          // seconds incrementing
+        if (seconds>59)     // when seconds reach value 59, set them to 0
         {
           seconds = 0;
-          minutes++;          // pridavani minut
-          if (minutes>59)     // kdyz vetsi nez 59 tak zpet na 0
+          minutes++;          // minutes incrementing
+          if (minutes>59)     // when minutes reach value 59, set them to 0
           {
             minutes = 0;    
           }
@@ -352,14 +355,14 @@ ISR(TIMER0_OVF_vect)
         
       }
 
-      else                   // kdyz tocim doleva
+      else                   //rotating counterlockwise
       {
-        seconds--;          // stejne jak minuty, nejak random to funguje 
-        if (seconds == -1)
+        seconds--;          // seconds decrementing
+        if (seconds == -1)  // when seconds reach value -1, set them to 59
         {
           seconds = 59;
-          minutes--;           // odcitam minuty
-          if (minutes == -1)    // toto nevim jak jinak udelat funguje to jak hovno
+          minutes--;           // minutes decrementing
+          if (minutes == -1)    // when minutes reach value -1, set them to 59
           {
             minutes = 59;
           }
@@ -368,7 +371,6 @@ ISR(TIMER0_OVF_vect)
     }
 
     ls_en_r = cs_en_r;
-    // sekundy a minuty se pridavaji zaroven, takze to by asi chtelo zmenit ale idk jak
     
   // start the alarm clock with pressed button
     if (cnt_en==0)
@@ -383,7 +385,7 @@ ISR(TIMER0_OVF_vect)
       
       no_of_overflows++;
       
-      // zastaveni pri vyprseni casu
+      // stop when reaching 00:00.0
       if (tenths == 0 && seconds == 0 && minutes == 0)
       {
         // Turn the LED ON if the alarm clock runs up
@@ -395,7 +397,7 @@ ISR(TIMER0_OVF_vect)
         
       }
 
-      // odcitani      
+      // start counting down
       else 
       {
         if (no_of_overflows >=  6)

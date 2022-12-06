@@ -45,9 +45,11 @@ Insert descriptive text and schematic(s) of your implementation.
 ## Software description
 
 * [Flowcharts](#Flowcharts) for:
-  * [Joystick button](#Joystickbutton)
-  * [Encoder button](#Encoderbutton)
-  * [Encoder rotation](#Encoderrotation)
+  * [Stopwatch](#Stopwatch)
+    * [Joystick button](#Joystickbutton)
+  * [Timer](#Timer)
+    * [Encoder button](#Encoderbutton)
+    * [Encoder rotation](#Encoderrotation)
 * [Libraries](#Libraries)
   * [Description](#Description)
   * [Source files](#Sourcefiles)
@@ -57,9 +59,15 @@ Insert descriptive text and schematic(s) of your implementation.
 ### Flowcharts
 bflmpsvz
 
+<a name="Stopwatch"></a>
+#### Stopwatch flowchart
+
 <a name="Joystickbutton"></a>
 #### Joystick button flowchart
 ![Joystick button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Joystick_button.drawio.png)
+
+<a name="Timer"></a>
+#### Stopwatch flowchart
 
 <a name="Encoderbutton"></a>
 #### Encoder button flowchart

@@ -117,6 +117,8 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 2. LCD
 3. TIMER
 4. SOURCE
+5. AVR
+6. ARDUINO
 
 <a name="Sourcefiles"></a>
 #### Source files

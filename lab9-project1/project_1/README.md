@@ -51,6 +51,7 @@ The analog joystick has 2 ADC channels which allow us to control processes in 2 
 <a name="Rotaryencoder"></a>
 ### Rotary encoder
 Encoder which we rotate with is used as a time changer for our timer. The rotation is based on combining 2 output signals inside the encoder. If the outputs are both the same, encoder was rotated clockwise and the time is set up. If we rotate it counterclockwise, the outputs will be opposite of each other and our time is set down.
+
 ![Rotary encoder](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/rotary-encoder.jpg)
 
 <a name="LEDdiode"></a>
@@ -61,6 +62,7 @@ Our external LED diode is connected to the board with a resistor so it wouldn't 
 <a name="Wiring"></a>
 ### Complete wiring of the system
 You can see below how the components are connected altogether. (Pins for Vcc and GND are not pictured but they are in every component and are used!)
+
 ![Wiring](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/simulIde_schematic.png)
 > **Note:** Picture was created by [SimulIDE](https://www.simulide.com/p/home.html).
 
@@ -152,4 +154,5 @@ Insert a link to a short video with your practical implementation example (1-3 m
 1. [Encoder](https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/?fbclid=IwAR2GDmzOCwF2mUCt-pVNGLNIA0n9qdLGAsA48_TlhPRhTdYTlosFNacai3k)
 2. [LCD display](https://digilent.com/reference/_media/reference/pmod/pmodclp/pmodclp_rm.pdf)
 3. [Digital Electronics 2 course run by doc. Ing. Tomáš Frýza, Ph.D.](https://github.com/tomas-fryza/digital-electronics-2)
+4. [Arduino UNO board](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf)
 

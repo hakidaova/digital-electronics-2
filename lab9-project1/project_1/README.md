@@ -83,11 +83,11 @@ Insert descriptive text and schematic(s) of your implementation.
 
 <a name="ADC_conversion"></a>
 #### ADC conversion flowchart
-![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Stopwatch.drawio.png)
+![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/ADC_conv.drawio.png)
 
 <a name="Stopwatch"></a>
 #### Stopwatch flowchart
-![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/ADC_conv.drawio.png)
+![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Stopwatch.drawio.png)
 
 <a name="Joystickbutton"></a>
 #### Joystick button flowchart

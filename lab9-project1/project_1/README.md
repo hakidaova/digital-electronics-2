@@ -9,8 +9,13 @@ The result of our project contains user-launched stopwatch and timer displayed o
 * Daová Hana
 * Foltyn Ondřej
 
-## Table of contents (?)
+## Table of contents
+* [Hardware](#Hardware)
+* [Software](#Software)
+* [Video](#Video)
+* [References](#References)
 
+<a name="Hardware"></a>
 ## Hardware description
 
 For our purposes, we use [Arduino UNO](#ArduinoUNO) that connects:
@@ -59,7 +64,7 @@ Insert descriptive text and schematic(s) of your implementation.
 
 
 
-
+<a name="Software"></a>
 ## Software description
 
 * [Flowcharts](#Flowcharts) for:
@@ -128,11 +133,12 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
    └── README.md       // Report of this project
    ```
 
-
+<a name="Video"></a>
 ## Video
 
 Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
 
+<a name="References"></a>
 ## References
 
 1. [Encoder](https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/?fbclid=IwAR2GDmzOCwF2mUCt-pVNGLNIA0n9qdLGAsA48_TlhPRhTdYTlosFNacai3k)

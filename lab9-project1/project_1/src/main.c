@@ -31,10 +31,10 @@
 #define JS_VRx PC0  // PC0 is where the VRx pin of the joystick is connected
 #define JS_VRy PC1  // PC1 is where the VRy pin of the joystick is connected
 
-// pin for LED
+// pins for LED
 #define LED_RED PC5 // PC5 is where the LED diode is connected
 
-// pin for rotary encoder
+// pins for rotary encoder
 #define EN_SW PB2   // PB2 is an AVR pin where the button of the encoder is connected
 #define EN_DT PB3   // PB3 is where the DT pin of the encoder is connected
 #define EN_CLK PB4  // PB4 is where the CLK pin of the encoder is connected

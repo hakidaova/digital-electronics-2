@@ -20,28 +20,37 @@ For our purposes, we use:
 * [Rotary encoder](#Rotaryencoder)
 * [LED diode](#LEDdiode)
 
+See our [wiring here](#Wiring)
+
 <a name="ArduinoUNO"></a>
 ### Arduino UNO
 
-![Arduino UNO](https://upload.wikimedia.org/wikipedia/commons/b/b8/ArduinoUNO.png)
+![Arduino UNO](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/arduino_uno.jpeg)
 
 <a name="LCDmodule"></a>
 ### LCD module
-zscrcjdtn
+![LCD module](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/LCD.png)
 
 <a name="Analogjoystick"></a>
 ### Analog joystick
-hchkrdtn
+![Analog joystick](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/joystick.jpg)
 
 <a name="Rotaryencoder"></a>
 ### Rotary encoder
-zscrcjdtn
+![Rotary encoder](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/rotary-encoder.jpg)
 
 <a name="LEDdiode"></a>
 ### LED diode
-zscrcjdtn
+![LED diode]()
+
+<a name="Wiring"></a>
+### Complete wiring of the system
+![Wiring](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/simulIde_schematic.png)
 
 Insert descriptive text and schematic(s) of your implementation.
+
+
+
 
 ## Software description
 

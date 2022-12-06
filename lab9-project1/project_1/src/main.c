@@ -66,7 +66,7 @@
 uint8_t ls_js, cs_js;             // last state, current state
 uint8_t ls_en, cs_en;             // last state and current state of the button of the encoder 
 uint8_t ls_en_r, cs_en_r;         // last and current state of the encoder
-int8_t cnt_ls = 0;
+int8_t cnt_js = 0;
 int8_t cnt_en = 0;
 int8_t cnt_en_r = 0;
 
@@ -126,8 +126,6 @@ int main(void)
   TIM2_overflow_interrupt_enable();
   TIM0_overflow_16ms();
   TIM0_overflow_interrupt_enable();
-  //TIM1_overflow_4ms();
-  //TIM1_overflow_interrupt_enable();
 
 
     // Enables interrupts by setting the global interrupt mask
@@ -172,21 +170,19 @@ ISR(TIMER2_OVF_vect)
       and with the change from 0 to 1 we stop the stopwatch
   */
 
- 
-  
   // lcd_gotoxy(6, 0);
   cs_js = GPIO_read(&PIND,JS_SW);
     if (cs_js!=ls_js)
     {
       if (GPIO_read(&PIND,JS_SW)==cs_js && cs_js==1)
       {
-        if(cnt_ls==0)
+        if(cnt_js==0)
         {
-          cnt_ls++;
+          cnt_js++;
         }
         else
         {
-          cnt_ls--;
+          cnt_js--;
         }
       }     
     }
@@ -194,7 +190,7 @@ ISR(TIMER2_OVF_vect)
   ls_js=cs_js;
 
   // start the stopwatch with pressed button
-  if(cnt_ls==0)
+  if(cnt_js==0)
   {  
     no_of_overflows++;
     if (no_of_overflows >= 6)

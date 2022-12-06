@@ -71,19 +71,23 @@ bflmpsvz
 
 <a name="Stopwatch"></a>
 #### Stopwatch flowchart
+![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Stopwatch.drawio.png)
 
 <a name="Joystickbutton"></a>
 #### Joystick button flowchart
 ![Joystick button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Joystick_button.drawio.png)
 
 <a name="Timer"></a>
-#### Stopwatch flowchart
+#### Timer flowchart
+![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/timer.drawio.png)
 
 <a name="Encoderbutton"></a>
 #### Encoder button flowchart
+![Encoder button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Encoder_button.drawio.png)
 
 <a name="Encoderrotation"></a>
 #### Encoder rotation flowchart
+![Encoder rotation](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Time_changing.drawio.png)
 
 
 <a name="Libraries"></a>

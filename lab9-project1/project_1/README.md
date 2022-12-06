@@ -59,6 +59,7 @@ bflmpsvz
 
 <a name="Joystickbutton"></a>
 #### Joystick button flowchart
+![Joystick button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Joystick_button.drawio.png)
 
 <a name="Encoderbutton"></a>
 #### Encoder button flowchart

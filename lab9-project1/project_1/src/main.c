@@ -106,7 +106,7 @@ int main(void)
     ADMUX |= (1<<REFS0);
 
     // Select input channel ADC0 (voltage divider pin)
-    ADMUX &= ~((1<<MUX3) | (1<<MUX3) | (1<<MUX3) | (1<<MUX3) );
+    ADMUX &= ~((1<<MUX3) | (1<<MUX2) | (1<<MUX1) | (1<<MUX0) );
     
     // Enable ADC module
     ADCSRA |= (1<<ADEN);
@@ -126,6 +126,11 @@ int main(void)
   TIM2_overflow_interrupt_enable();
   TIM0_overflow_16ms();
   TIM0_overflow_interrupt_enable();
+  
+  // Configure 16-bit Timer/Counter1 to start ADC conversion
+  // Set prescaler to 33 ms and enable overflow interrupt
+  TIM1_overflow_33ms();
+  TIM1_overflow_interrupt_enable();
 
 
     // Enables interrupts by setting the global interrupt mask
@@ -154,7 +159,6 @@ int main(void)
 
 
 
-
 /*----------------- STOPWATCH ------------------------*/
 ISR(TIMER2_OVF_vect)
 { 
@@ -162,8 +166,9 @@ ISR(TIMER2_OVF_vect)
   static uint8_t tenths = 0;  // Tenths of a second
   static uint8_t seconds = 0;   
   static uint8_t minutes = 0;
-  char string[2];             // String for converted numbers by itoa()
-    
+  char string[2]; 
+  
+  
   // reading the state of the button on joystick
   
   /*  with the change of the state from 1 to 0, the stopwatch is started 
@@ -401,42 +406,54 @@ ISR(TIMER0_OVF_vect)
     }
 }
 
-ISR(ADC_vect)
+ISR(TIMER1_OVF_vect)
 {
+    // Start ADC conversion
+    ADCSRA = ADCSRA | (1<<ADSC);
+}
+
+
+ISR(ADC_vect)
+{ 
   uint16_t x, y;
-  uint8_t channel = ADMUX & 0b00001111;
-  char string[4];
+  static uint8_t channel = 0;
+  char string[4];             // String for converted numbers by itoa()
 
   if(channel == 0)
   {
+    ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3));
+    
     x = ADC;
     itoa(x, string, 10);
     lcd_gotoxy(5,0);
-    lcd_puts("  ");
-    lcd_puts(string);
+    lcd_puts("   ");
     lcd_gotoxy(5,0);
+    lcd_puts(string);
     channel++;
-  
-    ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3));
+    
   }
 
   else if(channel == 1)
   {
+    ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3)); 
+    ADMUX |= (1<<MUX0);
+
     y = ADC;
     itoa(y, string, 10);
     lcd_gotoxy(5,1);
-    lcd_puts("  ");
-    lcd_puts(string);
+    lcd_puts("   ");
     lcd_gotoxy(5,1);
+    lcd_puts(string);
     channel = 0;
     
-    ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3)); ADMUX |= (1<<MUX0);
-
   }
+ 
+  if (x != 511 && y != 511)
+  {
+    lcd_gotoxy(8, 0);
+    lcd_putc('00:00.0');
+  }
+  
 }
-
-//ISR(TIMER1_OVF_vect)
-//{}
-
 
 

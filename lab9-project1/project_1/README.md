@@ -1,4 +1,4 @@
-# Project 1
+# Project 1 - Stopwatch and Timer
 
 Application of analog joy-stick (2 ADC channels, 1 push button), rotary encoder, and Digilent PmodCLP LCD module.
 
@@ -26,8 +26,8 @@ Application of analog joy-stick (2 ADC channels, 1 push button), rotary encoder,
 
 ### Team members
 
-* Daová Hana (responsible for xxx)
-* Foltyn Ondřej (responsible for xxx)
+* Daová Hana
+* Foltyn Ondřej
 
 ## Hardware description
 
@@ -43,6 +43,6 @@ Insert a link to a short video with your practical implementation example (1-3 m
 
 ## References
 
-1. Write your text here.
-2. ...
+1. [Encoder](https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/?fbclid=IwAR2GDmzOCwF2mUCt-pVNGLNIA0n9qdLGAsA48_TlhPRhTdYTlosFNacai3k)
+2. [LCD display](https://digilent.com/reference/_media/reference/pmod/pmodclp/pmodclp_rm.pdf)
 

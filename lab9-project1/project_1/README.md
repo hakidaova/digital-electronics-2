@@ -2,7 +2,7 @@
 
 Application of analog joy-stick (2 ADC channels, 1 push button), rotary encoder, and Digilent PmodCLP LCD module.
 
-The result of our project contains user-launched stopwatch and timer. The stopwatch is controlled by joystick button which starts or stops it. Pushing the button of the encoder has the same function but for timer. By rotating the encoder clockwise, the time on timer increases, decrementation is made by rotating it counterclockwise. End of the countdown process (i.e. the timer reaches 00:00.0) is signalised by a LED diode.
+The result of our project contains user-launched stopwatch and timer displayed on LCD module. The stopwatch is controlled by joystick button which starts or stops it. Pushing the button of the encoder has the same function but for timer. By rotating the encoder clockwise, the time on timer increases, decrementation is made by rotating it counterclockwise. End of the countdown process (i.e. the timer reaches 00:00.0) is signalised by a LED diode.
 
 ### Team members
 

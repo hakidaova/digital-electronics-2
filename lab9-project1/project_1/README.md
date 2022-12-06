@@ -27,6 +27,8 @@ Arduino UNO board with implemented microcontroller ATmega328 is our main compone
 
 ![Arduino UNO](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/arduino.jpeg)
 
+> **Note:** For more information about the board see the [manual](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf).
+
 <a name="LCDmodule"></a>
 ### LCD module
 ![LCD module](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/LCD.png)

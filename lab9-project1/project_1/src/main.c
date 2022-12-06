@@ -236,9 +236,7 @@ ISR(TIMER2_OVF_vect)
       minutes = minutes - minutes;
       seconds = seconds - seconds;
       tenths = tenths - tenths;
-    }
-    
-      
+    }     
       itoa(minutes, string, 10);  // Convert decimal value to string
       lcd_gotoxy(8, 0);
             
@@ -269,9 +267,6 @@ ISR(TIMER2_OVF_vect)
   
     
 }
-
-
-
 
 /*----------------- ALARM CLOCK ------------------------*/
 

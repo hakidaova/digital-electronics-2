@@ -53,7 +53,7 @@ It is supplied by up to 5 V.
 
 <a name="LEDdiode"></a>
 ### LED diode
-![LED diode]()
+![LED diode](vyfotit)
 
 <a name="Wiring"></a>
 ### Complete wiring of the system

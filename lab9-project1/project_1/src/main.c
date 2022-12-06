@@ -386,12 +386,11 @@ ISR(TIMER0_OVF_vect)
       // zastaveni pri vyprseni casu
       if (tenths == 0 && seconds == 0 && minutes == 0)
       {
-        // Turn the LED off if the alarm clock runs up
+        // Turn the LED ON if the alarm clock runs up
         if (led_value == LOW)
           led_value = HIGH;
         else
         led_value = LOW;
-        // Turn ON/OFF on-board LED
         digitalWrite(LED_RED, led_value);
         
       }
@@ -423,8 +422,6 @@ ISR(TIMER0_OVF_vect)
 ISR(ADC_vect)
 {
   static uint8_t channel = 0;
-  char string[4];             // String for converted numbers by itoa()
-
   if(channel == 0)
   {
     ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3));

@@ -129,7 +129,8 @@ You can see below how the components are connected altogether. (Pins for Vcc and
    * [lcd_definitions.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd_definitions.h)
 3. TIMER
    * [timer.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/include/timer.h)
-5. SOURCE
+4. SOURCE
+   * [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/src/main.c)
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 

@@ -50,14 +50,17 @@ The analog joystick has 2 ADC channels which allow us to control processes in 2 
 
 <a name="Rotaryencoder"></a>
 ### Rotary encoder
+Encoder which we rotate with is used as a time changer for our timer. The rotation is based on combining 2 output signals inside the encoder. If the outputs are both the same, encoder was rotated clockwise and the time is set up. If we rotate it counterclockwise, the outputs will be opposite of each other and our time is set down.
 ![Rotary encoder](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/rotary-encoder.jpg)
 
 <a name="LEDdiode"></a>
 ### LED diode
+Our external LED diode is connected to the board with a resistor so it wouldn't get destroyed. The connection was made as active high, which means that the diode lights up when the input is set to 1. Its function is to signalize that the timer already run out.
 ![LED diode](vyfotit)
 
 <a name="Wiring"></a>
 ### Complete wiring of the system
+You can see below how the components are connected altogether. (Pins for Vcc and GND are not pictured but they are in every component and are used!)
 ![Wiring](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/simulIde_schematic.png)
 > **Note:** Picture was created by [SimulIDE](https://www.simulide.com/p/home.html).
 

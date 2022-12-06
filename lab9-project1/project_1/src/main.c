@@ -82,8 +82,8 @@ int8_t cnt_en_r = 0;
 int main(void)
 {
     GPIO_mode_input_pullup(&DDRD,JS_SW); 
+    
     GPIO_mode_input_pullup(&DDRB,EN_SW);
-
     GPIO_mode_input_pullup(&DDRB,EN_DT);
     GPIO_mode_input_pullup(&DDRB,EN_CLK);
 
@@ -243,7 +243,7 @@ ISR(TIMER2_OVF_vect)
       itoa(tenths, string, 10);  // Convert decimal value to string
       lcd_gotoxy(14, 0);
       lcd_puts(string);
-      }
+    }
   }    
 }
 

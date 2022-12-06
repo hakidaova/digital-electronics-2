@@ -28,7 +28,7 @@ See our [wiring here](#Wiring)
 
 <a name="ArduinoUNO"></a>
 ### Arduino UNO
-Arduino UNO board with implemented microcontroller ATmega328 is our main component in this project. It has 14 digital GPIO input/output pins (6 PWM), 6 analog input pins, 16 MHz ceramic oscillator, a USB port which can be used as UART and a lot more.
+Arduino UNO board with implemented microcontroller ATmega328 is our main component in this project. It has 14 digital GPIO input/output pins (6 PWM), 6 analog input pins, 16 MHz ceramic oscillator, a USB port which can be used as UART and by which we connected it to the computer to load our programming code.
 
 ![Arduino UNO](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/arduino.jpeg)
 
@@ -37,7 +37,7 @@ Arduino UNO board with implemented microcontroller ATmega328 is our main compone
 <a name="LCDmodule"></a>
 ### LCD module
 LCD module used in our project is the one with dot matrix liquid crystal display controller HD44780. The display itself has 32 individual positions for characters (predefined or custom) equally divided into 2 rows.
-It is supplied by up to 5 V. 
+It is supplied by up to 5 V. The LCD shows us the times for both stopwatch and timer. 
 
 ![LCD module](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/LCD.png)
 
@@ -46,6 +46,7 @@ It is supplied by up to 5 V.
 <a name="Analogjoystick"></a>
 ### Analog joystick
 ![Analog joystick](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/joy-stick.jpg)
+The analog joystick has 2 ADC channels which allow us to control processes in 2 directions and to read them as X, Y coordinates thanks to VRx and VRy pins. We used its SW pin as a button for starting/stopping our stopwatch.
 
 <a name="Rotaryencoder"></a>
 ### Rotary encoder
@@ -83,11 +84,11 @@ Insert descriptive text and schematic(s) of your implementation.
 
 <a name="ADC_conversion"></a>
 #### ADC conversion flowchart
-![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/ADC_conv.drawio.png)
+![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Stopwatch.drawio.png)
 
 <a name="Stopwatch"></a>
 #### Stopwatch flowchart
-![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Stopwatch.drawio.png)
+![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/ADC_conv.drawio.png)
 
 <a name="Joystickbutton"></a>
 #### Joystick button flowchart

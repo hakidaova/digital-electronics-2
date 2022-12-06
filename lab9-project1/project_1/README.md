@@ -25,7 +25,7 @@ See our [wiring here](#Wiring)
 <a name="ArduinoUNO"></a>
 ### Arduino UNO
 
-![Arduino UNO](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/arduino_uno.jpeg)
+![Arduino UNO](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/arduino.jpeg)
 
 <a name="LCDmodule"></a>
 ### LCD module
@@ -33,7 +33,7 @@ See our [wiring here](#Wiring)
 
 <a name="Analogjoystick"></a>
 ### Analog joystick
-![Analog joystick](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/joystick.jpg)
+![Analog joystick](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/joy-stick.jpg)
 
 <a name="Rotaryencoder"></a>
 ### Rotary encoder

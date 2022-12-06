@@ -450,9 +450,6 @@ ISR(TIMER0_OVF_vect)
     }
 }
 
-
-
-
 ISR(ADC_vect)
 {
   static uint8_t channel = 0;
@@ -463,11 +460,6 @@ ISR(ADC_vect)
     ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3));
     
     x = ADC;
-    itoa(x, string, 10);
-    lcd_gotoxy(5,0);
-    lcd_puts("   ");
-    lcd_gotoxy(5,0);
-    lcd_puts(string);
     channel++;    
   }
 
@@ -477,11 +469,6 @@ ISR(ADC_vect)
     ADMUX |= (1<<MUX0);
 
     y = ADC;
-    itoa(y, string, 10);
-    lcd_gotoxy(5,1);
-    lcd_puts("   ");
-    lcd_gotoxy(5,1);
-    lcd_puts(string);
     channel = 0; 
   }
   

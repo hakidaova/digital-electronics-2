@@ -97,6 +97,10 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 #### Joystick button flowchart
 ![Joystick button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Joystick_button.drawio.png)
 
+<a name="Joystick_value"></a>
+#### Joystick movement
+![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/joystick.drawio.svg)
+
 <a name="Timer"></a>
 #### Timer flowchart
 ![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/timer.drawio.png)

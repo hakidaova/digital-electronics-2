@@ -422,8 +422,8 @@ ISR(ADC_vect)
   {
     ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3));
     
-    x = ADC;
-    channel++;    
+    x = ADC;      // x axis value 
+    channel++;    // set channel to 1
   }
 
   else if(channel == 1)
@@ -431,8 +431,8 @@ ISR(ADC_vect)
     ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3)); 
     ADMUX |= (1<<MUX0);
 
-    y = ADC;
-    channel = 0; 
+    y = ADC;      // y axis value
+    channel--;    // set channel back to 0
   }
   
 }

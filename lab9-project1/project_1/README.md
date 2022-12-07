@@ -127,7 +127,7 @@ You can see below how the components are connected altogether...
 3. ***TIMER*** makes it possible to control the built in registers for timer modules.
 4. ***SOURCE*** is where our main code is. This part builds up the system the way we want it to work and virtually connects the pins to Arduino board.
 5. ***AVR*** contains codes and definitions for the built in AVR microcontrollers.
-6. ***ARDUINO*** is
+6. ***ARDUINO*** library simplifies the usage of Arduino functions.
 
 <a name="Sourcefiles"></a>
 #### Source files

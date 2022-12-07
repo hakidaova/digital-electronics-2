@@ -39,14 +39,8 @@
 #define EN_DT PB3   // PB3 is where the DT pin of the encoder is connected
 #define EN_CLK PB4  // PB4 is where the CLK pin of the encoder is connected
 
-#define SHORT_DELAY 250 // Delay in milliseconds
-#ifndef F_CPU
-# define F_CPU 16000000 // CPU frequency in Hz required for delay funcs
-#endif
-
 /* Includes ----------------------------------------------------------*/
 #include <avr/io.h>         // AVR device-specific IO definitions
-#include <util/delay.h>     // Functions for busy-wait delay loops
 #include <avr/interrupt.h>  // Interrupts standard C library for AVR-GCC
 #include <gpio.h>           // GPIO library for AVR-GCC
 #include "timer.h"          // Timer library for AVR-GCC

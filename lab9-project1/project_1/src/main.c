@@ -424,7 +424,12 @@ ISR(TIMER0_OVF_vect)
     }
 }
 
+
 /*----------------- JOYSTICK POSITION ------------------------*/
+/**********************************************************************
+ * Function: ADC complete interrupt
+ * Purpose:  Get the value of joystick position for reseting the stopwatch.
+ **********************************************************************/
 
 ISR(ADC_vect)
 {

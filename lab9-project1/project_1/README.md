@@ -2,7 +2,7 @@
 
 Application of analog joy-stick (2 ADC channels, 1 push button), rotary encoder, and Digilent PmodCLP LCD module.
 
-The result of our project contains user-launched stopwatch and timer displayed on LCD module. The stopwatch is controlled by joystick button which starts or stops it. Pushing the button of the encoder has the same function but for timer. By rotating the encoder clockwise, the time on timer increases, decrementation is made by rotating it counterclockwise. End of the countdown process (i.e. the timer reaches 00:00.0) is signalised by a LED diode.
+The result of our project contains user-launched stopwatch and timer displayed on LCD module. The stopwatch is controlled by joystick button which starts it, stops it or resets it. Pushing the button of the encoder starts or stops the for timer. By rotating the encoder clockwise, the time on timer increases, decrementation is made by rotating it counterclockwise. End of the countdown process (i.e. the timer reaches 00:00.0) is signalised by a LED diode.
 
 ### Team members
 
@@ -45,12 +45,12 @@ It is supplied by up to 5 V. The LCD shows us the times for both stopwatch and t
 
 <a name="Analogjoystick"></a>
 ### Analog joystick
-The analog joystick has 2 ADC channels which allow us to control processes in 2 directions and to read them as X, Y coordinates thanks to VRx and VRy pins. We used its SW pin as a button for starting/stopping our stopwatch.
+The analog joystick has 2 ADC channels which allow us to control processes in 2 directions and to read them as X, Y coordinates thanks to VRx and VRy pins. We programmed it to reset our stopwatch when it is not in its default position and it is not pressed. We also used its SW pin as a button for starting/stopping our stopwatch.
 ![Analog joystick](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/joy-stick.jpg)
 
 <a name="Rotaryencoder"></a>
 ### Rotary encoder
-Encoder which we rotate with is used as a time changer for our timer. The rotation is based on combining 2 output signals inside the encoder. If the outputs are both the same, encoder was rotated clockwise and the time is set up. If we rotate it counterclockwise, the outputs will be opposite of each other and our time is set down.
+Encoder which we rotate with is used as a time changer for our timer. The rotation is based on combining 2 output signals inside the encoder. If the outputs are both the same, encoder was rotated clockwise and the time is set up. If we rotate it counterclockwise, the outputs will be the exact opposite of each other and our time is set down.
 
 ![Rotary encoder](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/rotary-encoder.jpg)
 
@@ -113,30 +113,36 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 
 <a name="Description"></a>
 #### Description
-1. GPIO
+1. GPIO 
+   * allows us to controll AVRs' gpio pins, i.e. reading/setting values, enabling pull-ups.
 2. LCD
+   * is a library using [Peter Fleury's](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd.h) functions for basic operations with LCD display.
 3. TIMER
+   * makes it possible to controll the built in registers for timer modules.
 4. SOURCE
+   * isis
 5. AVR
+   * is
 6. ARDUINO
+   * is
 
 <a name="Sourcefiles"></a>
 #### Source files
 1. GPIO
-   * [gpio.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/gpio.h)
-   * [gpio.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/gpio.c)
+   1. [gpio.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/gpio.h)
+   2. [gpio.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/gpio.c)
 2. LCD
-   * [lcd.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/lcd.c)
-   * [lcd.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd.h)
-   * [lcd_definitions.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd_definitions.h)
+   1. [lcd.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/gpio/lcd.c)
+   2. [lcd.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd.h)
+   3. [lcd_definitions.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd_definitions.h)
 3. TIMER
-   * [timer.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/include/timer.h)
+   1. [timer.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/include/timer.h)
 4. SOURCE
-   * [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/src/main.c)
+   1. [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/src/main.c)
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 
-## GitHub repository structure
+## Structure of our projeect code
 
    ```c
    ├── include         // Included files
@@ -151,7 +157,7 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
            └── lcd.c
    ├── src             // Source file(s)
    │   └── main.c
-   ├── test            // No need this
+   ├── test            // Temporary/support files
    ├── platformio.ini  // Project Configuration File
    └── README.md       // Report of this project
    ```
@@ -166,6 +172,6 @@ Insert a link to a short video with your practical implementation example (1-3 m
 
 1. [Encoder](https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/?fbclid=IwAR2GDmzOCwF2mUCt-pVNGLNIA0n9qdLGAsA48_TlhPRhTdYTlosFNacai3k)
 2. [LCD display](https://digilent.com/reference/_media/reference/pmod/pmodclp/pmodclp_rm.pdf)
-3. [Digital Electronics 2 course run by doc. Ing. Tomáš Frýza, Ph.D.](https://github.com/tomas-fryza/digital-electronics-2)
+3. [Digital Electronics 2](https://github.com/tomas-fryza/digital-electronics-2) course run by doc. Ing. Tomáš Frýza, Ph.D.
 4. [Arduino UNO board](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf)
 

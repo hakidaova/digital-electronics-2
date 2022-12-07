@@ -147,13 +147,12 @@ int main(void)
  
 }
 
-
 /* Interrupt service routines ----------------------------------------*/
 /**********************************************************************
- * Function: Timer/Counter2 overflow interrupt
- * Purpose:  Update the stopwatch on LCD screen every sixth overflow,
- *           ie approximately every 100 ms (6 x 16 ms = 100 ms).
+ * Function: Timer/Counter1 overflow interrupt
+ * Purpose:  Single conversion mode and starting conversion every 33 ms. 
  **********************************************************************/
+
 
 ISR(TIMER1_OVF_vect)
 {
@@ -163,6 +162,12 @@ ISR(TIMER1_OVF_vect)
 
 
 /*----------------- STOPWATCH ------------------------*/
+/**********************************************************************
+ * Function: Timer/Counter2 overflow interrupt
+ * Purpose:  Update the stopwatch on LCD screen every sixth overflow,
+ *           ie approximately every 100 ms (6 x 16 ms = 100 ms).
+ **********************************************************************/
+
 ISR(TIMER2_OVF_vect)
 { 
   static uint8_t no_of_overflows = 0;
@@ -174,11 +179,11 @@ ISR(TIMER2_OVF_vect)
   
   // reading the state of the button on joystick
   
-  /*  with the change of the state from 1 to 0, the stopwatch is started 
-      and with the change from 0 to 1 we stop the stopwatch
-  */
+  /***************************************************************** 
+  * With the change of the state from 1 to 0, the stopwatch is started 
+  * and with the change from 0 to 1 we stop the stopwatch.
+  ******************************************************************/
 
-  // lcd_gotoxy(6, 0);
   cs_js = GPIO_read(&PIND,JS_SW);
     if (cs_js!=ls_js)
     {
@@ -267,7 +272,11 @@ ISR(TIMER2_OVF_vect)
 }
 
 /*----------------- ALARM CLOCK ------------------------*/
-
+/**********************************************************************
+ * Function: Timer/Counter0 overflow interrupt
+ * Purpose:  Update the stopwatch on LCD screen every sixth overflow,
+ *           ie approximately every 100 ms (6 x 16 ms = 100 ms).
+ **********************************************************************/
 ISR(TIMER0_OVF_vect)
 {
     static uint8_t no_of_overflows = 0;
@@ -414,6 +423,8 @@ ISR(TIMER0_OVF_vect)
       }       
     }
 }
+
+/*----------------- JOYSTICK POSITION ------------------------*/
 
 ISR(ADC_vect)
 {

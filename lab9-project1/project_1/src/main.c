@@ -420,6 +420,7 @@ ISR(ADC_vect)
   static uint8_t channel = 0;
   if(channel == 0)
   {
+    // ADMUX to read value from A0
     ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3));
     
     x = ADC;      // x axis value 
@@ -428,6 +429,7 @@ ISR(ADC_vect)
 
   else if(channel == 1)
   {
+    // ADMUX to read value from A1
     ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3)); 
     ADMUX |= (1<<MUX0);
 

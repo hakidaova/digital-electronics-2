@@ -56,7 +56,7 @@ Encoder which we rotate with is used as a time changer for our timer. The rotati
 
 <a name="LEDdiode"></a>
 ### LED diode
-Our external LED diode is connected to the board with a resistor so it wouldn't get destroyed. The connection was made as active high, which means that the diode lights up when the input is set to 1. Its function is to signalize that the timer already run out.
+Our external LED diode is connected to the board with a resistor so it wouldn't get destroyed. The connection was made as active high, which means that the diode lights up when the input is set to 1. Its function is to signalize that the timer already ran out.
 ![LED diode](vyfotit)
 
 <a name="Wiring"></a>
@@ -70,10 +70,8 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 ## Software description
 
 * [Flowcharts](#Flowcharts) for:
-  * [ADC conversion](#ADC)
   * [Stopwatch](#Stopwatch)
     * [Joystick button](#Joystickbutton)
-    * [Joystick value](#Joystickvalue)
   * [Timer](#Timer)
     * [Encoder button](#Encoderbutton)
     * [Encoder rotation](#Encoderrotation)
@@ -96,10 +94,6 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 <a name="Joystickbutton"></a>
 #### Joystick button flowchart
 ![Joystick button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Joystick_button.drawio.png)
-
-<a name="Joystickvalue"></a>
-#### Joystick value flowchart
-![Joystick value flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/joystick.drawio.svg)
 
 <a name="Timer"></a>
 #### Timer flowchart
@@ -126,9 +120,9 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 3. TIMER
    * makes it possible to controll the built in registers for timer modules.
 4. SOURCE
-   * isis
+   * is where our main code is. This part builds up the system the way we want it to work and virtually connects the pins to Arduino board.
 5. AVR
-   * is
+   * contains codes and definitions for the built in AVR microcontrollers.
 6. ARDUINO
    * is
 

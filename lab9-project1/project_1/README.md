@@ -70,8 +70,10 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 ## Software description
 
 * [Flowcharts](#Flowcharts) for:
+  * [ADC conversion](#ADC_conversion)
   * [Stopwatch](#Stopwatch)
     * [Joystick button](#Joystickbutton)
+    * [Joystick movement](#Joystick_value)
   * [Timer](#Timer)
     * [Encoder button](#Encoderbutton)
     * [Encoder rotation](#Encoderrotation)

@@ -45,7 +45,7 @@ It is supplied by up to 5 V. The LCD shows us the times for both stopwatch and t
 
 <a name="Analogjoystick"></a>
 ### Analog joystick
-The analog joystick has 2 ADC channels which allow us to control processes in 2 directions and to read them as X, Y coordinates thanks to VRx and VRy pins. We programmed it to reset our stopwatch when it is not in its default position and it is not pressed. We also used its SW pin as a button for starting/stopping our stopwatch.
+The analog joystick has 2 ADC channels which allow us to control processes in 2 directions and to read them as X, Y coordinates thanks to VRx and VRy pins. We used its SW pin as a button for starting/stopping our stopwatch. The stopwatch can be also reset by moving the joystick in any direction.
 ![Analog joystick](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/joy-stick.jpg)
 
 <a name="Rotaryencoder"></a>
@@ -57,11 +57,14 @@ Encoder which we rotate with is used as a time changer for our timer. The rotati
 <a name="LEDdiode"></a>
 ### LED diode
 Our external LED diode is connected to the board with a resistor so it wouldn't get destroyed. The connection was made as active high, which means that the diode lights up when the input is set to 1. Its function is to signalize that the timer already ran out.
-![LED diode](vyfotit)
 
 <a name="Wiring"></a>
 ### Complete wiring of the system
-You can see below how the components are connected altogether. (Pins for Vcc and GND are not pictured but they are in every component and are used!)
+You can see below how the components are connected altogether...
+
+![Wiring IRL](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/wiring.jpg)
+
+...and once again here for clearer view on exact pins. (Pins for Vcc and GND are not pictured but they are in every component and are used!)
 
 ![Wiring](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/simulIde_schematic.png)
 > **Note:** Picture was created by [SimulIDE](https://www.simulide.com/p/home.html).
@@ -119,18 +122,12 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 
 <a name="Description"></a>
 #### Description
-1. GPIO 
-   * allows us to controll AVRs' gpio pins, i.e. reading/setting values, enabling pull-ups.
-2. LCD
-   * is a library using [Peter Fleury's](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd.h) functions for basic operations with LCD display.
-3. TIMER
-   * makes it possible to controll the built in registers for timer modules.
-4. SOURCE
-   * is where our main code is. This part builds up the system the way we want it to work and virtually connects the pins to Arduino board.
-5. AVR
-   * contains codes and definitions for the built in AVR microcontrollers.
-6. ARDUINO
-   * is
+1. ***GPIO*** allows us to controll AVRs' gpio pins, i.e. reading/setting values, enabling pull-ups.
+2. ***LCD*** is a library using [Peter Fleury's](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/lib/lcd/lcd.h) functions for basic operations with LCD display.
+3. ***TIMER*** makes it possible to control the built in registers for timer modules.
+4. ***SOURCE*** is where our main code is. This part builds up the system the way we want it to work and virtually connects the pins to Arduino board.
+5. ***AVR*** contains codes and definitions for the built in AVR microcontrollers.
+6. ***ARDUINO*** is
 
 <a name="Sourcefiles"></a>
 #### Source files
@@ -146,9 +143,7 @@ You can see below how the components are connected altogether. (Pins for Vcc and
 4. SOURCE
    1. [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/project_1/src/main.c)
 
-Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
-
-## Structure of our projeect code
+## Structure of our project code
 
    ```c
    ├── include         // Included files

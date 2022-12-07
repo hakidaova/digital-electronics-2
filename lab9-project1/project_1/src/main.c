@@ -196,74 +196,76 @@ ISR(TIMER2_OVF_vect)
     }
 
   ls_js=cs_js;
+  if (x == 511 && y == 511)
+  {
+    // start the stopwatch with pressed button
+    if(cnt_js==0)
+    { 
+      no_of_overflows++;
+      
+      
 
-  // start the stopwatch with pressed button
-  if(cnt_js==0)
-  { 
-    no_of_overflows++;
-    if (x == 511 && y == 511)
-    {
+        if (no_of_overflows >= 6)
+        {
+          // Do this every 6 x 16 ms = 100 ms
+          no_of_overflows = 0;
+          tenths++;  
 
-      if (no_of_overflows >= 6)
-      {
-        // Do this every 6 x 16 ms = 100 ms
-        no_of_overflows = 0;
-        tenths++;  
+          if(tenths > 9)
+          { 
+            tenths = 0;
+            seconds++;
 
-        if(tenths > 9)
-        { 
-          tenths = 0;
-          seconds++;
-
-          if (seconds > 59)
-          {
-            seconds = 0;
-            minutes++;
-                
-            if (minutes > 59)
+            if (seconds > 59)
             {
-              minutes = 0;
-            }
-                
-          }    
+              seconds = 0;
+              minutes++;
+                  
+              if (minutes > 59)
+              {
+                minutes = 0;
+              }
+                  
+            }    
+          }
         }
-      }
-    }    
-    else
-    {
-      minutes = 0;
-      seconds = 0;
-      tenths = 0;
-    }     
-      itoa(minutes, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(8, 0);
-            
-      if (minutes < 10)
-      { 
-        lcd_putc('0');
-      }
-            
-      lcd_puts(string);
-      lcd_gotoxy(10, 0);
-      lcd_putc(':');
-      itoa(seconds, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(11, 0);
-            
-      if (seconds < 10)
-      {
-        lcd_putc('0');
-      }
-            
-      lcd_puts(string);
-      lcd_gotoxy(13, 0);
-      lcd_putc('.');
-            
-      itoa(tenths, string, 10);  // Convert decimal value to string
-      lcd_gotoxy(14, 0);
-      lcd_puts(string);
+    }
   }
   
-    
+  else
+  {
+    minutes = 0;
+    seconds = 0;
+    tenths = 0;
+  }     
+
+  itoa(minutes, string, 10);  // Convert decimal value to string
+  lcd_gotoxy(8, 0);
+  
+  if (minutes < 10)
+  { 
+    lcd_putc('0');
+  }
+            
+  lcd_puts(string);
+  lcd_gotoxy(10, 0);
+  lcd_putc(':');
+  itoa(seconds, string, 10);  // Convert decimal value to string
+  lcd_gotoxy(11, 0);
+            
+  if (seconds < 10)
+  {
+    lcd_putc('0');
+  }
+            
+  lcd_puts(string);
+  lcd_gotoxy(13, 0);
+  lcd_putc('.');
+            
+  itoa(tenths, string, 10);  // Convert decimal value to string
+  lcd_gotoxy(14, 0);
+  lcd_puts(string);
+
 }
 
 /*----------------- ALARM CLOCK ------------------------*/

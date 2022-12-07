@@ -166,7 +166,7 @@ You can see below how the components are connected altogether...
 <a name="Video"></a>
 ## Video
 Here is a video of our timer function:
-(https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/Timer.mov)
+(https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/Timer.gif)
 
 Here is a gif of our stopwatch function simulated in [SimulIDE](https://www.simulide.com/p/home.html) since the real life version did not work properly (the joystick button did not react):
 (https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/Stopwatch.gif)

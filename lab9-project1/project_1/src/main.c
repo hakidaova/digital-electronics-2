@@ -197,40 +197,36 @@ ISR(TIMER2_OVF_vect)
 
   ls_js=cs_js;
 
-  
+  no_of_overflows++;
   if (x == 511 && y == 511)
   {
     // start the stopwatch with pressed button
     if(cnt_js==0)
     { 
-      no_of_overflows++;
-      
-      
+      if (no_of_overflows >= 6)
+      {
+        // Do this every 6 x 16 ms = 100 ms
+        no_of_overflows = 0;
+        tenths++;  
 
-        if (no_of_overflows >= 6)
-        {
-          // Do this every 6 x 16 ms = 100 ms
-          no_of_overflows = 0;
-          tenths++;  
+        if(tenths > 9)
+        { 
+          tenths = 0;
+          seconds++;
 
-          if(tenths > 9)
-          { 
-            tenths = 0;
-            seconds++;
-
-            if (seconds > 59)
+          if (seconds > 59)
+          {
+            seconds = 0;
+            minutes++;
+                  
+            if (minutes > 59)
             {
-              seconds = 0;
-              minutes++;
+              minutes = 0;
+            }
                   
-              if (minutes > 59)
-              {
-                minutes = 0;
-              }
-                  
-            }    
-          }
+          }    
         }
+      }
     }
   }
   

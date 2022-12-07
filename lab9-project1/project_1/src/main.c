@@ -237,9 +237,9 @@ ISR(TIMER2_OVF_vect)
     }    
     else
     {
-      minutes = minutes - minutes;
-      seconds = seconds - seconds;
-      tenths = tenths - tenths;
+      minutes = 0;
+      seconds = 0;
+      tenths = 0;
     }     
       itoa(minutes, string, 10);  // Convert decimal value to string
       lcd_gotoxy(8, 0);

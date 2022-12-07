@@ -196,6 +196,8 @@ ISR(TIMER2_OVF_vect)
     }
 
   ls_js=cs_js;
+
+  
   if (x == 511 && y == 511)
   {
     // start the stopwatch with pressed button

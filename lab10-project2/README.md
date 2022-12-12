@@ -29,8 +29,8 @@ The goal of the project is cooperation in pairs, further study of the topic, des
 
 ### Team members
 
-* Member 1 (responsible for xxx)
-* Member 2 (responsible for xxx)
+* Daová Hana
+* Foltyn Ondřej
 
 ## Hardware description
 

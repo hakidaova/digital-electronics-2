@@ -12,23 +12,6 @@ The goal of the project is cooperation in pairs, further study of the topic, des
 
 * The source code for the AVR must be written in C and/or Assembly and must be implementable on Arduino Uno board using toolchains from the semester, ie PlatformIO and not in the Arduino-style. No other development tools are allowed.
 
-## Recommended GitHub repository structure
-
-   ```c
-   YOUR_PROJECT        // PlatfomIO project
-   ├── include         // Included files
-       └── timer.h  
-   ├── lib             // Libraries
-       └── gpio
-           └── gpio.c
-           └── gpio.h
-   ├── src             // Source file(s)
-   │   └── main.c
-   ├── test            // Temporary/support files
-   ├── platformio.ini  // Project Configuration File
-   └── README.md       // Report of this project
-   ```
-
 ## Recommended README.md file structure
 
 ### Team members
@@ -51,6 +34,35 @@ Insert descriptive text and schematic(s) of your implementation.
 <a name="Servosrotating"></a>
 #### Flowchart of rotating with the encoder and the motors 
 ![Encoder rotation](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project2/rotating_servos.drawio.svg)
+
+## Structure of our project code
+   ```c
+   YOUR_PROJECT        // PlatfomIO project
+   ├── include         // Included files
+       └── timer.h  
+   ├── lib             // Libraries
+       └── gpio
+           └── gpio.c
+           └── gpio.h
+   ├── src             // Source file(s)
+   │   └── main.c
+   ├── test            // Temporary/support files
+   ├── platformio.ini  // Project Configuration File
+   └── README.md       // Report of this project
+   ```
+
+<a name="Sourcefiles"></a>
+#### Source files
+1. GPIO
+   1. [gpio.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/lib/gpio/gpio.h)
+   2. [gpio.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/lib/gpio/gpio.c)
+2. TIMER
+   1. [timer.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/include/timer.h)
+3. SOURCE
+   1. [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/src/main.c)
+
+## Structure of our project code
+
 
 ## Video
 

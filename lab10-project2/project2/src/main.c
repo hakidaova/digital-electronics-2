@@ -1,17 +1,17 @@
 /* Defines -----------------------------------------------------------*/
 
 // pins for rotary encoder
-#define EN_DT PB3     // PB3 is where the DT pin of the encoder is connected
-#define EN_CLK PB4    // PB4 is where the CLK pin of the encoder is connected
-#define EN_SW PB5     // PB5 is an AVR pin where the button of the encoder is connected
+#define EN_DT PB3       // PB3 is where the DT pin of the encoder is connected
+#define EN_CLK PB4      // PB4 is where the CLK pin of the encoder is connected
+#define EN_SW PB5       // PB5 is an AVR pin where the button of the encoder is connected
 
-#define servo1 PB1    // PWM od the Servo1 connection
-#define servo2 PB2    // PWM od the Servo2 connection
+#define servo1 PB1      // PWM od the Servo1 connection
+#define servo2 PB2      // PWM od the Servo2 connection
 
-# define min_pos 1000   // the minimum position to which the servo will turn
-# define max_pos 2500   // the maximum position to which the servo will turn
-# define step 500
-# define DELAY 1000   // Delay in milliseconds
+# define min_pos 950   // the minimum position to which the servo will turn
+# define max_pos 2050   // the maximum position to which the servo will turn
+# define step 50       // step with which the servo motors rotates
+# define DELAY 1000     // Delay in milliseconds
 
 
 /* Includes ----------------------------------------------------------*/
@@ -28,17 +28,20 @@ int8_t cnt_en = 0;
 int8_t cnt_en_r = 0;
 
 uint32_t m1_position = min_pos;
-uint32_t m2_position = min_pos;
+uint32_t m2_position = max_pos;
 
 int main(void)
 {
+  // set pins for encoder 
   GPIO_mode_input_pullup(&DDRB,EN_SW);
   GPIO_mode_input_pullup(&DDRB,EN_DT);
   GPIO_mode_input_pullup(&DDRB,EN_CLK);
 
+  // set pins for servo motors
   GPIO_mode_output(&DDRB, servo1);
   GPIO_mode_output(&DDRB, servo2);
 
+  // Configure Timer/Counter 0
   TIM0_overflow_interrupt_enable();
   TIM0_overflow_16ms();
 
@@ -48,6 +51,7 @@ int main(void)
 
   TCCR1A |= (1<<COM0A1) | (1<<COM0B1);        // set compare output mode
 
+  // set TOP value 
   ICR1 = 20000;
 
   OCR1A = m1_position;
@@ -118,33 +122,24 @@ ISR(TIMER0_OVF_vect)
             m1_position = min_pos;
           }
                
-        }
-    
-        else if (cnt_en == 0)
-        {
-          m2_position += step;     
+        }        
+      }
+    }    
+    else
+    { 
+      if (cnt_en == 0)
+      {
+        m2_position -= step;     
 
-          if (m2_position == max_pos)
+          if (m2_position == min_pos)
           {
-            m2_position = min_pos;
+            m2_position = max_pos;
           }
-        }
-       
       }
-        
-      else
-      {  
-        if (cnt_en == 1)      
-        {
-        }
-    
-        else if (cnt_en == 0)
-        {
-        }
-      }
-      OCR1A = m1_position;
-      OCR1B = m2_position;
     }
+    OCR1A = m1_position;
+    OCR1B = m2_position;
+    
   }
   ls_en_r = cs_en_r;
 }

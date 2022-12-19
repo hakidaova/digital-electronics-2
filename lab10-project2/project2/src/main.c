@@ -10,7 +10,7 @@
 
 # define min_pos 1000   // the minimum position to which the servo will turn
 # define max_pos 2500   // the maximum position to which the servo will turn
-# define step 100
+# define step 500
 # define DELAY 1000   // Delay in milliseconds
 
 
@@ -85,60 +85,59 @@ ISR(TIMER0_OVF_vect)
 
   //working with the button of the rotary encoder
   cs_en = GPIO_read(&PINB,EN_SW);
-    if (cs_en!=ls_en)
+  if (cs_en!=ls_en)
+  {
+    if (GPIO_read(&PINB,EN_SW)==cs_en && cs_en==1)
     {
-      if (GPIO_read(&PINB,EN_SW)==cs_en && cs_en==1)
+      if(cnt_en==0)
       {
-        if(cnt_en==0)
-        {
-          cnt_en++;
-        }
-        else
-        {
-          cnt_en--;
-        }
+        cnt_en++;
+      }
+      else
+      {
+        cnt_en--;
       }
     }
+  }
   ls_en=cs_en;
 
   //working with the rotary encoder
   cs_en_r = GPIO_read(&PINB, EN_CLK);
-    if (cs_en_r != ls_en_r && cs_en_r == 1)
+  if (cs_en_r != ls_en_r && cs_en_r == 1)
+  {
+    if(GPIO_read(&PINB, EN_DT) != cs_en_r) //rotating clockwise
     {
-      if(GPIO_read(&PINB, EN_DT) != cs_en_r) //rotating clockwise
-      {
-        if(cnt_en_r==0)
+      if(cnt_en_r==0)
+      {          
+        if (cnt_en == 1)      // if button 0, work with servo 1
         {
-          cnt_en_r++;
-          if (cnt_en == 1)      // if button 0, work with servo 1
-          {
-            m1_position += step;
-          }
-    
-          else if (cnt_en == 0)
-          {
-            m2_position += step;
-          }
-          
+          m1_position += step;          
         }
-
-        else
+    
+        else if (cnt_en == 0)
         {
-          cnt_en_r--;
-          if (cnt_en == 1)      
-          {
-            m1_position -= step;
-          }
-    
-          else if (cnt_en == 0)
-          {
-            m2_position -= step;
-          }
+          m2_position += step;
         }
+        cnt_en_r++;
       }
+        
+      else
+      {  
+        if (cnt_en == 1)      
+        {
+          //m1_position -= step;
+        }
+    
+        else if (cnt_en == 0)
+        {
+          //m2_position -= step;
+        }
+        cnt_en_r--;
+
+      }
+      OCR1A = m1_position;
+      OCR1B = m2_position;
     }
-    ls_en_r = cs_en_r;
-      
-    OCR1A = m1_position;
-    OCR1B = m2_position;
+  }
+  ls_en_r = cs_en_r;
 }

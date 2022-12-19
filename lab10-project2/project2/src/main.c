@@ -8,8 +8,9 @@
 #define servo1 PB1    // PWM od the Servo1 connection
 #define servo2 PB2    // PWM od the Servo2 connection
 
-# define M_min 1000
-# define M_max 2500
+# define min_pos 1000   // the minimum position to which the servo will turn
+# define max_pos 2500   // the maximum position to which the servo will turn
+# define step 100
 # define DELAY 1000   // Delay in milliseconds
 
 
@@ -26,8 +27,8 @@ uint8_t ls_en_r, cs_en_r;         // last state, current state of the rotary enc
 int8_t cnt_en = 0;
 int8_t cnt_en_r = 0;
 
-uint32_t m1_position = M_min;
-uint32_t m2_position = M_max;
+uint32_t m1_position = min_pos;
+uint32_t m2_position = min_pos;
 
 int main(void)
 {
@@ -46,6 +47,7 @@ int main(void)
   TCCR1B |= (1<<WGM13);
 
   TCCR1A |= (1<<COM0A1) | (1<<COM0B1);        // set compare output mode
+
   ICR1 = 20000;
 
   OCR1A = m1_position;
@@ -57,27 +59,6 @@ int main(void)
   PCMSK0 |= (1<<PCINT0);          // Enable PCINT0 change interrupt  
   
 
-  /*
-// Set 10. waveform generation mode (1010)
-  TCCR1A |= (1 << WGM11);                  
-  TCCR1B |= (1 << WGM13);
-
-// Set compare output mode
-  TCCR1A |= (1 << COM0A1) | (1 << COM0B1); 
-
-     // Set TOP value
-  ICR1 = 1250;
-                         
-    // Set duty cycle
-  OCR1A = m1_position;
-  OCR1B = m2_position;
-    
-    // Set prescaler to 64
-  TCCR1B |= (1 << CS11) | (1 << CS10 ); 
-
-  PCICR |= (1<<PCIE0);                    // Any change of any enable PCINT[7:0] pins will cause an interrupt
-  PCMSK0 |= (1<<PCINT0);                  // Enable PCINT0 change interrupt  
-*/
   // Enables interrupts by setting the global interrupt mask
   sei();
 
@@ -94,34 +75,6 @@ int main(void)
 
 ISR(TIMER0_OVF_vect)
 {
-    for(m1_position = M_min; m1_position <= M_max; m1_position += 1)
-    {
-        OCR1A = m1_position;
-    }
-    _delay_ms(DELAY); // Wait 1 s
-
-    for(m1_position = M_max; m1_position >= M_min; m1_position -= 1)
-    {
-        OCR1A = m1_position;
-    }
-    _delay_ms(DELAY); // Wait 1 s
-
-    for(m2_position = M_min; m2_position <= M_max; m2_position += 1)
-    {
-        OCR1B = m2_position;
-    }
-    _delay_ms(DELAY); // Wait 1 s
-
-    for(m2_position = M_max; m2_position >= M_min; m2_position -= 1)
-    {
-        OCR1B = m2_position;
-    }
-    _delay_ms(DELAY); // Wait 1 s
-}
-
-/*
-ISR(TIMER0_OVF_vect)
-{
   // reading the state of the button on encoder
   
   /***************************************************************** 
@@ -129,7 +82,7 @@ ISR(TIMER0_OVF_vect)
   * and with the change from 0 to 1 we stop that servo and start 
   * the other one
   ******************************************************************/
-/*
+
   //working with the button of the rotary encoder
   cs_en = GPIO_read(&PINB,EN_SW);
     if (cs_en!=ls_en)
@@ -157,14 +110,35 @@ ISR(TIMER0_OVF_vect)
         if(cnt_en_r==0)
         {
           cnt_en_r++;
+          if (cnt_en == 1)      // if button 0, work with servo 1
+          {
+            m1_position += step;
+          }
+    
+          else if (cnt_en == 0)
+          {
+            m2_position += step;
+          }
+          
         }
+
         else
         {
           cnt_en_r--;
+          if (cnt_en == 1)      
+          {
+            m1_position -= step;
+          }
+    
+          else if (cnt_en == 0)
+          {
+            m2_position -= step;
+          }
         }
       }
     }
     ls_en_r = cs_en_r;
-    
+      
+    OCR1A = m1_position;
+    OCR1B = m2_position;
 }
-*/

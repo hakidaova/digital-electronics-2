@@ -51,6 +51,17 @@ Insert descriptive text and schematic(s) of your implementation.
    └── README.md       // Report of this project
    ```
 
+<a name="Libraries"></a>
+### Libraries
+
+<a name="Description"></a>
+#### Description
+1. ***GPIO*** allows us to controll AVRs' gpio pins, i.e. reading/setting values, enabling pull-ups.
+2. ***TIMER*** makes it possible to control the built in registers for timer modules.
+3. ***SOURCE*** is where our main code is. This part builds up the system the way we want it to work and virtually connects the pins to Arduino board.
+4. ***AVR*** contains codes and definitions for the built in AVR microcontrollers.
+5. ***ARDUINO*** library simplifies the usage of Arduino functions.
+
 <a name="Sourcefiles"></a>
 #### Source files
 1. GPIO
@@ -60,9 +71,6 @@ Insert descriptive text and schematic(s) of your implementation.
    1. [timer.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/include/timer.h)
 3. SOURCE
    1. [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/src/main.c)
-
-## Structure of our project code
-
 
 ## Video
 

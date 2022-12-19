@@ -26,6 +26,8 @@ Insert descriptive text and schematic(s) of your implementation.
 ## Software description
 
 * [Flowcharts](#Flowcharts) for:
+   * [Encoder button](#Encoderbutton)
+   * [Encoder rotation](Servosrotating)
 
 <a name="Encoderbutton"></a>
 #### Encoder button flowchart

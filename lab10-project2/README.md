@@ -45,7 +45,7 @@ Insert descriptive text and schematic(s) of your implementation.
 ![Encoder button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/Encoder_button.drawio.png)
 
 <a name="Servosrotating"></a>
-#### Rotation of the encoder and the motors flowchart
+#### Flowchart of rotating with the encoder and the motors 
 ![Encoder rotation](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project2/rotating_servos.drawio.svg)
 
 ## Video

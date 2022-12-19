@@ -17,10 +17,14 @@ The goal of the project is cooperation in pairs, further study of the topic, des
    ```c
    YOUR_PROJECT        // PlatfomIO project
    ├── include         // Included files
+       └── timer.h  
    ├── lib             // Libraries
+       └── gpio
+           └── gpio.c
+           └── gpio.h
    ├── src             // Source file(s)
    │   └── main.c
-   ├── test            // No need this
+   ├── test            // Temporary/support files
    ├── platformio.ini  // Project Configuration File
    └── README.md       // Report of this project
    ```

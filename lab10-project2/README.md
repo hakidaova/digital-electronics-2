@@ -79,4 +79,6 @@ Insert a link to a short video with your practical implementation example (1-3 m
 ## References
 
 1. Write your text here.
-2. ...
+2. [datasheet
+](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)
+3.[smthg](https://navody.dratek.cz/arduino-projekty/servo-motor.html)

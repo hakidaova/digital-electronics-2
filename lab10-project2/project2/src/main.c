@@ -123,20 +123,17 @@ ISR(TIMER0_OVF_vect)
   if (cs_en_r != ls_en_r && cs_en_r == 1)
   {
     if(GPIO_read(&PINB, EN_DT) != cs_en_r)    // Rotate the encoder clockwise
-    {
-      if(cnt_en_r==0)       
-      {         
-        if (cnt_en == 1)      // Value 1 after pressing the button
-        {
-          m1_position += step;    
+    {            
+      if (cnt_en == 1)      // Value 1 after pressing the button
+      {
+        m1_position += step;    
 
-          // If servo 1 reaches the maximum position, turn it back
-          if (m1_position == max_pos)
-          {
-            m1_position = min_pos;
-          }               
-        }        
-      }
+        // If servo 1 reaches the maximum position, turn it back
+        if (m1_position == max_pos)
+        {
+          m1_position = min_pos;
+        }               
+      }      
     }   
 
     else      // Rotate the encoder counterclockwise

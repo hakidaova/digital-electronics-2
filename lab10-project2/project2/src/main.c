@@ -108,21 +108,34 @@ ISR(TIMER0_OVF_vect)
     if(GPIO_read(&PINB, EN_DT) != cs_en_r) //rotating clockwise
     {
       if(cnt_en_r==0)
-      {          
+      { 
+        cnt_en_r++;         
         if (cnt_en == 1)      // if button 0, work with servo 1
         {
-          m1_position += step;          
+          m1_position += step;     
+
+          if (m1_position == max_pos)
+          {
+            m1_position = min_pos;
+          }
+               
         }
     
         else if (cnt_en == 0)
         {
-          m2_position += step;
+          m2_position += step;     
+
+          if (m2_position == max_pos)
+          {
+            m2_position = min_pos;
+          }
         }
-        cnt_en_r++;
+       
       }
         
       else
       {  
+        cnt_en_r--;
         if (cnt_en == 1)      
         {
           //m1_position -= step;
@@ -132,8 +145,6 @@ ISR(TIMER0_OVF_vect)
         {
           //m2_position -= step;
         }
-        cnt_en_r--;
-
       }
       OCR1A = m1_position;
       OCR1B = m2_position;

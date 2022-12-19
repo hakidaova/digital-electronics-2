@@ -90,31 +90,31 @@ You can see below how the components are connected altogether...
 
 <a name="ADC_conversion"></a>
 #### ADC conversion flowchart
-![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/ADC_conv.drawio.png)
+![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/ADC_conv.drawio.png)
 
 <a name="Stopwatch"></a>
 #### Stopwatch flowchart
-![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Stopwatch.drawio.png)
+![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/Stopwatch.drawio.png)
 
 <a name="Joystickbutton"></a>
 #### Joystick button flowchart
-![Joystick button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Joystick_button.drawio.png)
+![Joystick button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/Joystick_button.drawio.png)
 
 <a name="Joystick_value"></a>
 #### Joystick movement
-![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/joystick.drawio.svg)
+![ADC conversion](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/joystick.drawio.svg)
 
 <a name="Timer"></a>
 #### Timer flowchart
-![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/timer.drawio.png)
+![Stopwatch flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/timer.drawio.png)
 
 <a name="Encoderbutton"></a>
 #### Encoder button flowchart
-![Encoder button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Encoder_button.drawio.png)
+![Encoder button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/Encoder_button.drawio.png)
 
 <a name="Encoderrotation"></a>
 #### Encoder rotation flowchart
-![Encoder rotation](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/project1/Time_changing.drawio.png)
+![Encoder rotation](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/Time_changing.drawio.png)
 
 
 <a name="Libraries"></a>

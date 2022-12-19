@@ -8,9 +8,9 @@
 #define servo1 PB1      // PWM od the Servo1 connection
 #define servo2 PB2      // PWM od the Servo2 connection
 
-# define min_pos 950   // the minimum position to which the servo will turn
-# define max_pos 2050   // the maximum position to which the servo will turn
-# define step 50       // step with which the servo motors rotates
+# define min_pos 950    // The minimum position to which the servo will turn
+# define max_pos 2050   // The maximum position to which the servo will turn
+# define step 50        // Step with which the servo motors rotates
 # define DELAY 1000     // Delay in milliseconds
 
 
@@ -22,36 +22,39 @@
 #include "timer.h"          // Timer library for AVR-GCC
 #include <stdlib.h>         // C library. Needed for number conversions¨
 
-uint8_t ls_en, cs_en;             // last state, current state of encoder button
-uint8_t ls_en_r, cs_en_r;         // last state, current state of the rotary encoder             
+uint8_t ls_en, cs_en;             // Last state, current state of encoder button
+uint8_t ls_en_r, cs_en_r;         // Last state, current state of the rotary encoder             
 int8_t cnt_en = 0;
 int8_t cnt_en_r = 0;
 
-uint32_t m1_position = min_pos;
+// Starting positions of servo motors
+uint32_t m1_position = min_pos;   
 uint32_t m2_position = max_pos;
+
 
 int main(void)
 {
-  // set pins for encoder 
+  // Set pins for encoder 
   GPIO_mode_input_pullup(&DDRB,EN_SW);
   GPIO_mode_input_pullup(&DDRB,EN_DT);
   GPIO_mode_input_pullup(&DDRB,EN_CLK);
 
-  // set pins for servo motors
+  // Set pins for servo motors as outputs
   GPIO_mode_output(&DDRB, servo1);
   GPIO_mode_output(&DDRB, servo2);
 
   // Configure Timer/Counter 0
+  // Enable the interrupt and set the overflow prescaler to 16 ms  
   TIM0_overflow_interrupt_enable();
   TIM0_overflow_16ms();
 
-
-  //Working with registers to rotate the servos, mode 8 (1000)
+  // Waveform Generation Mode 8 (1000)
   TCCR1B |= (1<<WGM13);
 
-  TCCR1A |= (1<<COM0A1) | (1<<COM0B1);        // set compare output mode
+  // Set compare output mode
+  TCCR1A |= (1<<COM0A1) | (1<<COM0B1);
 
-  // set TOP value 
+  // Set TOP value 
   ICR1 = 20000;
 
   OCR1A = m1_position;
@@ -77,17 +80,20 @@ int main(void)
   return 0;
 }
 
+
+/* Interrupt service routines ----------------------------------------*/
+/**********************************************************************
+ * Function: Timer/Counter0 overflow interrupt
+ **********************************************************************/
+
+
 ISR(TIMER0_OVF_vect)
 {
-  // reading the state of the button on encoder
-  
-  /***************************************************************** 
-  * With the change of the state from 1 to 0, one servo is started 
-  * and with the change from 0 to 1 we stop that servo and start 
-  * the other one
-  ******************************************************************/
 
-  //working with the button of the rotary encoder
+  /*******************************************************************
+  * Reading the state of the button on encoder with the change of the state from 1 to 0 and conversely
+  ********************************************************************/
+
   cs_en = GPIO_read(&PINB,EN_SW);
   if (cs_en!=ls_en)
   {
@@ -105,38 +111,49 @@ ISR(TIMER0_OVF_vect)
   }
   ls_en=cs_en;
 
-  //working with the rotary encoder
+
+  /*******************************************************************
+   * Working with the rotary encoder
+   * When rotating the encoder clockwise, the servo 1 is rotating clockwise,
+   * after pressing the button, the servo 2 rotating counterclockwise when
+   * rotating the encoder counterclockwise.
+   ******************************************************************/
+
   cs_en_r = GPIO_read(&PINB, EN_CLK);
   if (cs_en_r != ls_en_r && cs_en_r == 1)
   {
-    if(GPIO_read(&PINB, EN_DT) != cs_en_r) //rotating clockwise
+    if(GPIO_read(&PINB, EN_DT) != cs_en_r)    // Rotate the encoder clockwise
     {
-      if(cnt_en_r==0)
+      if(cnt_en_r==0)       
       {         
-        if (cnt_en == 1)      // if button 0, work with servo 1
+        if (cnt_en == 1)      // Value 1 after pressing the button
         {
-          m1_position += step;     
+          m1_position += step;    
 
+          // If servo 1 reaches the maximum position, turn it back
           if (m1_position == max_pos)
           {
             m1_position = min_pos;
-          }
-               
+          }               
         }        
       }
-    }    
-    else
+    }   
+
+    else      // Rotate the encoder counterclockwise
     { 
-      if (cnt_en == 0)
+      if (cnt_en == 0)      // Value 0 after pressing the button
       {
         m2_position -= step;     
 
-          if (m2_position == min_pos)
-          {
-            m2_position = max_pos;
-          }
+        // If servo 2 reaches the minimum position, turn it back
+        if (m2_position == min_pos)   
+        {
+          m2_position = max_pos;  
+        }
       }
     }
+
+    // Put servo values to registers
     OCR1A = m1_position;
     OCR1B = m2_position;
     

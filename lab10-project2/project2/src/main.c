@@ -108,8 +108,7 @@ ISR(TIMER0_OVF_vect)
     if(GPIO_read(&PINB, EN_DT) != cs_en_r) //rotating clockwise
     {
       if(cnt_en_r==0)
-      { 
-        cnt_en_r++;         
+      {         
         if (cnt_en == 1)      // if button 0, work with servo 1
         {
           m1_position += step;     
@@ -135,15 +134,12 @@ ISR(TIMER0_OVF_vect)
         
       else
       {  
-        cnt_en_r--;
         if (cnt_en == 1)      
         {
-          //m1_position -= step;
         }
     
         else if (cnt_en == 0)
         {
-          //m2_position -= step;
         }
       }
       OCR1A = m1_position;

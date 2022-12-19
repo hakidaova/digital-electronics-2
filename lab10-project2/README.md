@@ -38,7 +38,15 @@ Insert descriptive text and schematic(s) of your implementation.
 
 ## Software description
 
-Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
+* [Flowcharts](#Flowcharts) for:
+
+<a name="Encoderbutton"></a>
+#### Encoder button flowchart
+![Encoder button flowchart](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project1/Encoder_button.drawio.png)
+
+<a name="Servosrotating"></a>
+#### Rotation of the encoder and the motors flowchart
+![Encoder rotation](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project2/rotating_servos.drawio.svg)
 
 ## Video
 

@@ -1,12 +1,17 @@
 /* Defines -----------------------------------------------------------*/
 
 // pins for rotary encoder
-#define EN_SW PB2   // PB2 is an AVR pin where the button of the encoder is connected
-#define EN_DT PB3   // PB3 is where the DT pin of the encoder is connected
-#define EN_CLK PB4  // PB4 is where the CLK pin of the encoder is connected
+#define EN_DT PB3     // PB3 is where the DT pin of the encoder is connected
+#define EN_CLK PB4    // PB4 is where the CLK pin of the encoder is connected
+#define EN_SW PB5     // PB5 is an AVR pin where the button of the encoder is connected
 
-#define PWM1 PD5 // PWM od the Servo1 connection
-#define PWM2 PD6 // PWM od the Servo2 connection
+#define servo1 PB1    // PWM od the Servo1 connection
+#define servo2 PB2    // PWM od the Servo2 connection
+
+# define M_min 1000
+# define M_max 2500
+# define DELAY 1000   // Delay in milliseconds
+
 
 /* Includes ----------------------------------------------------------*/
 #include <avr/io.h>         // AVR device-specific IO definitions
@@ -21,6 +26,8 @@ uint8_t ls_en_r, cs_en_r;         // last state, current state of the rotary enc
 int8_t cnt_en = 0;
 int8_t cnt_en_r = 0;
 
+uint32_t m1_position = M_min;
+uint32_t m2_position = M_max;
 
 int main(void)
 {
@@ -28,46 +35,91 @@ int main(void)
   GPIO_mode_input_pullup(&DDRB,EN_DT);
   GPIO_mode_input_pullup(&DDRB,EN_CLK);
 
+  GPIO_mode_output(&DDRB, servo1);
+  GPIO_mode_output(&DDRB, servo2);
+
   TIM0_overflow_interrupt_enable();
-  TIM0_overflow_1ms();
-
-  //Working with registers to rotate the servos, mode 5 (101), prescaler 8
-  DDRD |= (1<<PD5);
-  DDRD |= (1<<PD6);
-  OCR0A = 200;
-  TCCR0A |= (1<<COM0A1) | (1<<COM0B1) | (1<<WGM00);
-
-  TCCR0B |= (1<<CS01) | (1<<WGM02);
-
-
-
+  TIM0_overflow_16ms();
 
 
   //Working with registers to rotate the servos, mode 8 (1000)
- // TCCR1A |= (1<<WGM13);
+  TCCR1B |= (1<<WGM13);
 
-  //TCCR1A |= (1<<COM1A1) | (1<<COM1B1);
+  TCCR1A |= (1<<COM0A1) | (1<<COM0B1);        // set compare output mode
+  ICR1 = 20000;
 
-  //ICR1 = 2500;
+  OCR1A = m1_position;
+  OCR1B = m2_position;
 
+  TCCR1B |= (1<<CS11);            // set prescaler to 8
 
+  PCICR |= (1<<PCIE0);            // Any change of any enable PCINT[7:0] pins will cause an interrupt
+  PCMSK0 |= (1<<PCINT0);          // Enable PCINT0 change interrupt  
+  
 
+  /*
+// Set 10. waveform generation mode (1010)
+  TCCR1A |= (1 << WGM11);                  
+  TCCR1B |= (1 << WGM13);
 
+// Set compare output mode
+  TCCR1A |= (1 << COM0A1) | (1 << COM0B1); 
 
+     // Set TOP value
+  ICR1 = 1250;
+                         
+    // Set duty cycle
+  OCR1A = m1_position;
+  OCR1B = m2_position;
+    
+    // Set prescaler to 64
+  TCCR1B |= (1 << CS11) | (1 << CS10 ); 
+
+  PCICR |= (1<<PCIE0);                    // Any change of any enable PCINT[7:0] pins will cause an interrupt
+  PCMSK0 |= (1<<PCINT0);                  // Enable PCINT0 change interrupt  
+*/
   // Enables interrupts by setting the global interrupt mask
-    sei();
+  sei();
 
     // Infinite loop
-    while (1)
-    {
+  while (1)
+  {
         /* Empty loop. All subsequent operations are performed exclusively 
          * inside interrupt service routines, ISRs */
-    }
+  }
 
     // Will never reach this
-    return 0;
+  return 0;
 }
 
+ISR(TIMER0_OVF_vect)
+{
+    for(m1_position = M_min; m1_position <= M_max; m1_position += 1)
+    {
+        OCR1A = m1_position;
+    }
+    _delay_ms(DELAY); // Wait 1 s
+
+    for(m1_position = M_max; m1_position >= M_min; m1_position -= 1)
+    {
+        OCR1A = m1_position;
+    }
+    _delay_ms(DELAY); // Wait 1 s
+
+    for(m2_position = M_min; m2_position <= M_max; m2_position += 1)
+    {
+        OCR1B = m2_position;
+    }
+    _delay_ms(DELAY); // Wait 1 s
+
+    for(m2_position = M_max; m2_position >= M_min; m2_position -= 1)
+    {
+        OCR1B = m2_position;
+    }
+    _delay_ms(DELAY); // Wait 1 s
+}
+
+/*
 ISR(TIMER0_OVF_vect)
 {
   // reading the state of the button on encoder
@@ -77,7 +129,7 @@ ISR(TIMER0_OVF_vect)
   * and with the change from 0 to 1 we stop that servo and start 
   * the other one
   ******************************************************************/
-
+/*
   //working with the button of the rotary encoder
   cs_en = GPIO_read(&PINB,EN_SW);
     if (cs_en!=ls_en)
@@ -113,4 +165,6 @@ ISR(TIMER0_OVF_vect)
       }
     }
     ls_en_r = cs_en_r;
+    
 }
+*/

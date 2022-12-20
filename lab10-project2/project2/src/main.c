@@ -5,8 +5,8 @@
 #define EN_CLK PB4      // PB4 is where the CLK pin of the encoder is connected
 #define EN_SW PB5       // PB5 is an AVR pin where the button of the encoder is connected
 
-#define servo1 PB1      // PWM od the Servo1 connection
-#define servo2 PB2      // PWM od the Servo2 connection
+#define servo1 PB1      // PWM of the Servo1 connection
+#define servo2 PB2      // PWM of the Servo2 connection
 
 # define min_pos 950    // The minimum position to which the servo will turn
 # define max_pos 2050   // The maximum position to which the servo will turn
@@ -64,19 +64,18 @@ int main(void)
 
   PCICR |= (1<<PCIE0);            // Any change of any enable PCINT[7:0] pins will cause an interrupt
   PCMSK0 |= (1<<PCINT0);          // Enable PCINT0 change interrupt  
-  
 
   // Enables interrupts by setting the global interrupt mask
   sei();
 
-    // Infinite loop
+  // Infinite loop
   while (1)
   {
-        /* Empty loop. All subsequent operations are performed exclusively 
-         * inside interrupt service routines, ISRs */
+    /* Empty loop. All subsequent operations are performed exclusively 
+     * inside interrupt service routines, ISRs */
   }
 
-    // Will never reach this
+  // Will never reach this
   return 0;
 }
 
@@ -86,10 +85,8 @@ int main(void)
  * Function: Timer/Counter0 overflow interrupt
  **********************************************************************/
 
-
 ISR(TIMER0_OVF_vect)
 {
-
   /*******************************************************************
   * Reading the state of the button on encoder with the change of the state from 1 to 0 and conversely
   ********************************************************************/

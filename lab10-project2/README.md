@@ -48,6 +48,12 @@ description
 
 > **Note:** For more information about the board see the [manual](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf).
 
+<a name="Rotaryencoder"></a>
+### Rotary encoder
+Encoder which we rotate with is used as a time changer for our timer. The rotation is based on combining 2 output signals inside the encoder. If the outputs are both the same, encoder was rotated clockwise and the time is set up. If we rotate it counterclockwise, the outputs will be the exact opposite of each other and our time is set down.
+
+![Rotary encoder](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/rotary-encoder.jpg)
+
 Insert descriptive text and schematic(s) of your implementation.
 
 <a name="Software"></a>

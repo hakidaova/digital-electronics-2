@@ -122,5 +122,5 @@ Insert a link to a short video with your practical implementation example (1-3 m
 ## References
 
 1. [Digital Electronics 2](https://github.com/tomas-fryza/digital-electronics-2) course run by doc. Ing. Tomáš Frýza, Ph.D.
-2. [datasheet](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)
-3. [smthg co jsem cetl](https://navody.dratek.cz/arduino-projekty/servo-motor.html)
+2. [ATmega328P Datasheet](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)
+3. [Servo motors article](https://navody.dratek.cz/arduino-projekty/servo-motor.html) in Czech language

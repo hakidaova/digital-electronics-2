@@ -12,8 +12,6 @@ The goal of the project is cooperation in pairs, further study of the topic, des
 
 * The source code for the AVR must be written in C and/or Assembly and must be implementable on Arduino Uno board using toolchains from the semester, ie PlatformIO and not in the Arduino-style. No other development tools are allowed.
 
-## Recommended README.md file structure
-
 ### Team members
 
 * Daová Hana
@@ -29,10 +27,8 @@ The goal of the project is cooperation in pairs, further study of the topic, des
 ## Hardware description
 
 For our purposes, we use [Arduino UNO](#ArduinoUNO) that connects:
-* [LCD module](#LCDmodule)
-* [Analog joystick](#Analogjoystick)
+* [2 Servo motors](#Servomotor)
 * [Rotary encoder](#Rotaryencoder)
-* [LED diode](#LEDdiode)
 
 See our [wiring here](#Wiring)
 
@@ -44,9 +40,13 @@ Arduino UNO board with implemented microcontroller ATmega328 is our main compone
 
 > **Note:** For more information about the board see the [manual](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf).
 
+<a name="Servomotor"></a>
+### Servo motor
+description
 
-<a name="Hardware"></a>
-## Hardware description
+![Servo motor](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/servomotor.jpeg)
+
+> **Note:** For more information about the board see the [manual](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf).
 
 Insert descriptive text and schematic(s) of your implementation.
 
@@ -55,11 +55,13 @@ Insert descriptive text and schematic(s) of your implementation.
 
 * [Flowcharts](#Flowcharts) for:
    * [Encoder button](#Encoderbutton)
-   * [Encoder rotation](Servosrotating)
+   * [Encoder rotation](#Servosrotating)
 * [Libraries](#Libraries)
   * [Description](#Description)
   * [Source files](#Sourcefiles)
 
+<a name="Flowcharts"></a>
+### Flowcharts
 
 <a name="Encoderbutton"></a>
 #### Encoder button flowchart
@@ -68,6 +70,26 @@ Insert descriptive text and schematic(s) of your implementation.
 <a name="Servosrotating"></a>
 #### Flowchart of rotating with the encoder and the motors 
 ![Encoder rotation](https://github.com/OndraFoltyn/digital-electronics-2/blob/main/projects/project2/rotating_servos.drawio.svg)
+
+<a name="Libraries"></a>
+### Libraries
+
+<a name="Description"></a>
+#### Description
+1. ***GPIO*** allows us to controll AVRs' gpio pins, i.e. reading/setting values, enabling pull-ups.
+2. ***TIMER*** makes it possible to control the built in registers for timer modules.
+3. ***SOURCE*** is where our main code is. This part builds up the system the way we want it to work and virtually connects the pins to Arduino board.
+4. ***AVR*** contains codes and definitions for the built in AVR microcontrollers.
+
+<a name="Sourcefiles"></a>
+#### Source files
+1. GPIO
+   1. [gpio.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/lib/gpio/gpio.h)
+   2. [gpio.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/lib/gpio/gpio.c)
+2. TIMER
+   1. [timer.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/include/timer.h)
+3. SOURCE
+   1. [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/src/main.c)
 
 ## Structure of our project code
    ```c
@@ -85,27 +107,6 @@ Insert descriptive text and schematic(s) of your implementation.
    └── README.md       // Report of this project
    ```
 
-<a name="Libraries"></a>
-### Libraries
-
-<a name="Description"></a>
-#### Description
-1. ***GPIO*** allows us to controll AVRs' gpio pins, i.e. reading/setting values, enabling pull-ups.
-2. ***TIMER*** makes it possible to control the built in registers for timer modules.
-3. ***SOURCE*** is where our main code is. This part builds up the system the way we want it to work and virtually connects the pins to Arduino board.
-4. ***AVR*** contains codes and definitions for the built in AVR microcontrollers.
-5. ***ARDUINO*** library simplifies the usage of Arduino functions.
-
-<a name="Sourcefiles"></a>
-#### Source files
-1. GPIO
-   1. [gpio.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/lib/gpio/gpio.h)
-   2. [gpio.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/lib/gpio/gpio.c)
-2. TIMER
-   1. [timer.h](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/include/timer.h)
-3. SOURCE
-   1. [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/src/main.c)
-
 <a name="Video"></a>
 ## Video
 
@@ -114,6 +115,6 @@ Insert a link to a short video with your practical implementation example (1-3 m
 <a name="References"></a>
 ## References
 
-1. Write your text here.
+1. [Digital Electronics 2](https://github.com/tomas-fryza/digital-electronics-2) course run by doc. Ing. Tomáš Frýza, Ph.D.
 2. [datasheet](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)
 3. [smthg co jsem cetl](https://navody.dratek.cz/arduino-projekty/servo-motor.html)

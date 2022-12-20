@@ -17,12 +17,40 @@ The goal of the project is cooperation in pairs, further study of the topic, des
 ### Team members
 
 * Daová Hana
-* Foltyn Ondřej
+* Foltyn Ondřej 
 
+## Table of contents
+* [Hardware](#Hardware)
+* [Software](#Software)
+* [Video](#Video)
+* [References](#References)
+
+<a name="Hardware"></a>
+## Hardware description
+
+For our purposes, we use [Arduino UNO](#ArduinoUNO) that connects:
+* [LCD module](#LCDmodule)
+* [Analog joystick](#Analogjoystick)
+* [Rotary encoder](#Rotaryencoder)
+* [LED diode](#LEDdiode)
+
+See our [wiring here](#Wiring)
+
+<a name="ArduinoUNO"></a>
+### Arduino UNO
+Arduino UNO board with implemented microcontroller ATmega328 is our main component in this project. It has 14 digital GPIO input/output pins (6 PWM), 6 analog input pins, 16 MHz ceramic oscillator, a USB port which can be used as UART and by which we connected it to the computer to load our programming code.
+
+![Arduino UNO](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/arduino.jpeg)
+
+> **Note:** For more information about the board see the [manual](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf).
+
+
+<a name="Hardware"></a>
 ## Hardware description
 
 Insert descriptive text and schematic(s) of your implementation.
 
+<a name="Software"></a>
 ## Software description
 
 * [Flowcharts](#Flowcharts) for:
@@ -74,10 +102,12 @@ Insert descriptive text and schematic(s) of your implementation.
 3. SOURCE
    1. [main.c](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/project2/src/main.c)
 
+<a name="Video"></a>
 ## Video
 
 Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
 
+<a name="References"></a>
 ## References
 
 1. Write your text here.

@@ -56,6 +56,10 @@ Insert descriptive text and schematic(s) of your implementation.
 * [Flowcharts](#Flowcharts) for:
    * [Encoder button](#Encoderbutton)
    * [Encoder rotation](Servosrotating)
+* [Libraries](#Libraries)
+  * [Description](#Description)
+  * [Source files](#Sourcefiles)
+
 
 <a name="Encoderbutton"></a>
 #### Encoder button flowchart

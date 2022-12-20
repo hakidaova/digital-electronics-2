@@ -125,7 +125,9 @@ You can see below how the components are connected altogether...
 <a name="Video"></a>
 ## Video
 
-Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
+Here is how our servo motors work:
+
+![](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/images/video.MOV)
 
 <a name="References"></a>
 ## References

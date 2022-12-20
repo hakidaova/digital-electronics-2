@@ -54,8 +54,17 @@ Encoder which we rotate with is used as a time changer for our timer. The rotati
 
 ![Rotary encoder](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/rotary-encoder.jpg)
 
-Insert descriptive text and schematic(s) of your implementation.
+<a name="Wiring"></a>
+### Complete wiring of the system
+You can see below how the components are connected altogether...
 
+![Wiring IRL](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/wiring.jpg)
+
+...and once again here for clearer view on exact pins. (Pins for Vcc and GND are not pictured but they are in every component and are used!)
+
+![Wiring](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/simulIde_schematic.png)
+> **Note:** Picture was created by [SimulIDE](https://www.simulide.com/p/home.html).
+> 
 <a name="Software"></a>
 ## Software description
 

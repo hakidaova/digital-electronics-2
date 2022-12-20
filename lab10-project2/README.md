@@ -44,7 +44,7 @@ Arduino UNO board with implemented microcontroller ATmega328 is our main compone
 ### Servo motor
 description
 
-![Servo motor](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/servomotor.jpeg)
+![Servo motor](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/images/servo.jpg)
 
 > **Note:** For more information about the board see the [manual](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf).
 

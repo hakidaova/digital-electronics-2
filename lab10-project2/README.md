@@ -2,15 +2,7 @@
 
 Precise generation of several PWM channels. Application of two (or more) Servo motors SG90.
 
-## Instructions
-
-The goal of the project is cooperation in pairs, further study of the topic, design of own solutions, implementation, creation of project documentation and presentation of results. The division of roles and tasks within the team is up to their members.
-
-* Students work on a project in the labs during the 12th and 13th weeks of the semester.
-
-* Through the BUT e-learning, students submit a link to the GitHub repository, which contains the complete project in PlatfomIO and a descriptive README file. The submission deadline is the day before the next laboratory, i.e. in 2 weeks.
-
-* The source code for the AVR must be written in C and/or Assembly and must be implementable on Arduino Uno board using toolchains from the semester, ie PlatformIO and not in the Arduino-style. No other development tools are allowed.
+The goal of our project was to create a system that would use Arduino Uno's built in PWM to moderate 2 servo motors. For managing them, we used a rotary encoder.
 
 ### Team members
 
@@ -42,15 +34,14 @@ Arduino UNO board with implemented microcontroller ATmega328 is our main compone
 
 <a name="Servomotor"></a>
 ### Servo motor
-description
+Servo motors are mainly used for setting certain positions and maintaining them. Most of them can be found in robotics or automated manufacturing. The motors usually have 3 wires - the red one is for Vcc, the brown (or black) for GND and the orange (or yellow) one is for PWM. They can only be rotated by maximally 180 degrees, so in our project we set the default position of **Servo 1** to 0° (minimum) and the **Servo 2**'s to 180° (maximum).
 
 ![Servo motor](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/images/servo.jpg)
 
-> **Note:** For more information about the board see the [manual](https://docs.arduino.cc/resources/datasheets/A000066-datasheet.pdf).
 
 <a name="Rotaryencoder"></a>
 ### Rotary encoder
-Encoder which we rotate with is used as a time changer for our timer. The rotation is based on combining 2 output signals inside the encoder. If the outputs are both the same, encoder was rotated clockwise and the time is set up. If we rotate it counterclockwise, the outputs will be the exact opposite of each other and our time is set down.
+The encoder's button is used as a selector of the servo motor we want to operate with. Rotation of the encoder is based on combining 2 output signals inside the encoder. If the outputs are both the same, encoder was rotated clockwise and the **Servo 1** is rotated (if it has been chosen) by up to 180° clockwise. After reaching the maximum position (180°), the motor goes back to its default position (0°). **Servo 2** doesn't react to this operation even when it's chosen. If we rotate the encoder counterclockwise, **Servo 2** is rotated (if it has been chosen) by up to 180° counterclockwise. After reaching the minimum position (0°), the motor goes back to its default position (180°). **Servo 1** doesn't react to this operation even when it is chosen.
 
 ![Rotary encoder](https://github.com/hakidaova/digital-electronics-2/blob/main/lab9-project1/images/rotary-encoder.jpg)
 
@@ -60,7 +51,7 @@ You can see below how the components are connected altogether...
 
 ![Wiring IRL](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/images/wiring.jpeg)
 
-...and once again here for clearer view on exact pins. (Pins for Vcc and GND are not pictured but they are in every component and are used!)
+...and once again here for clearer view on exact pins. (We had to change the PWM pins from 5 and 6 to 9 and 10 because we wanted to work with registers OC1A/B)
 
 ![Wiring](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/images/simullIde-schematic.jpeg)
 > **Note:** Picture was created by [SimulIDE](https://www.simulide.com/p/home.html).

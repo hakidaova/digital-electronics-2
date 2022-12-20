@@ -127,7 +127,7 @@ You can see below how the components are connected altogether...
 
 Here is how our servo motors work:
 
-![](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/images/video.MOV)
+![](https://github.com/hakidaova/digital-electronics-2/blob/main/lab10-project2/images/function.mp4)
 
 <a name="References"></a>
 ## References
